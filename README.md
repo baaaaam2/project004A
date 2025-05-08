@@ -10,7 +10,7 @@
 IDE : Visual Studio 2022<br/>
 언어 : C++<br/>
 <h2>클래스 정리</h2>
-<p style="font-weight:bold;">캐릭터<br/>
+<p style="font-weight:bold;">캐릭터</p><br/>
      (HP, MAXHP, 이름, 공격력, 방어력)<br/>
  - 플레이어<br/>
  - 보스몬스터<br/>
