@@ -9,3 +9,5 @@
 운영 체제 : Windows<br/>
 IDE : Visual Studio 2022<br/>
 언어 : C++<br/>
+<h2>게임 설명</h2>
+<h2>기타 정보</h2>
