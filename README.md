@@ -7,6 +7,5 @@
 장주환 5779392<br/>
  <h2>개발 환경</h2>
  운영 체제 : Windows<br/>
- IDE : Visual Studio 2022
- ```
+ IDE : Visual Studio 2022<br/>
  언어 : C++<br/>
