@@ -1,8 +1,10 @@
-#include <iostream>
-usingnamespace std;
+#include "game.h"
 
-int main(void)
-{
-  cout << "Hello World" << endl;
-  return 0; 
+int main() {
+    Map map;
+    Player player("");
+    Boss boss;
+    Controller controller(player, boss, map);
+    controller.startGame();
+    return 0;
 }
