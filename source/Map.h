@@ -3,12 +3,12 @@
 
 #include "Player.h"
 
-const int MAP_WIDTH = 30; //¸Ê XÃà Å©±â
-const int MAP_HEIGHT = 20; //¸Ê YÃà Å©±â
-const int BOSS_X = MAP_WIDTH - 5; //º¸½º XÃà À§Ä¡
-const int BOSS_Y = MAP_HEIGHT - 2; //º¸½º YÃà À§Ä¡
-const int BOSS_LABEL_Y = MAP_HEIGHT - 3; //º¸½º ¶óº§ À§Ä¡
-//¸Ê Å¬·¡½º
+const int MAP_WIDTH = 30; //ë§µ Xì¶• í¬ê¸°
+const int MAP_HEIGHT = 20; //ë§µ Yì¶• í¬ê¸°
+const int BOSS_X = MAP_WIDTH - 5; //ë³´ìŠ¤ Xì¶• ìœ„ì¹˜
+const int BOSS_Y = MAP_HEIGHT - 2; //ë³´ìŠ¤ Yì¶• ìœ„ì¹˜
+const int BOSS_LABEL_Y = MAP_HEIGHT - 3; //ë³´ìŠ¤ ë¼ë²¨ ìœ„ì¹˜
+//ë§µ í´ë˜ìŠ¤
 class Map {
 public:
     Map();

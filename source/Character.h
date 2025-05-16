@@ -1,6 +1,6 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-//Ä³¸¯ÅÍ Å¬·¡½º
+//ìºë¦­í„° í´ë˜ìŠ¤
 class Character {
 public:
     Character(int maxHP, int attack, int defense);
@@ -9,10 +9,10 @@ public:
     virtual void takeDamage(int amount);
     bool isDead() const;
 
-    int maxHP; //ÃÖ´ëÃ¼·Â
-    int hp; //ÇöÁ¦Ã¼·Â
-    int attack; //°ø°İ·Â
-    int defense; //¹æ¾î·Â
+    int maxHP; //ìµœëŒ€ì²´ë ¥
+    int hp; //í˜„ì œì²´ë ¥
+    int attack; //ê³µê²©ë ¥
+    int defense; //ë°©ì–´ë ¥
 };
 
 #endif

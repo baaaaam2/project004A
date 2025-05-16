@@ -3,7 +3,7 @@
 
 #include <string>
 #include "Character.h"
-//ÇÃ·¹ÀÌ¾î Å¬·¡½º <= Ä³¸¯ÅÍ »ó¼Ó
+//í”Œë ˆì´ì–´ í´ëž˜ìŠ¤ <= ìºë¦­í„° ìƒì†
 class Player : public Character {
 public:
     Player(std::string name);

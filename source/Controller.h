@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Boss.h"
 #include "Map.h"
-//ÄÁÆ®·Ñ·¯ Å¬·¡½º(Å°º¸µå ÀÎ½Ä -> ¿òÁ÷ÀÓ)
+//ì»¨íŠ¸ë¡¤ëŸ¬ í´ë˜ìŠ¤(í‚¤ë³´ë“œ ì¸ì‹ -> ì›€ì§ì„)
 class Controller {
 public:
     Controller(Player& player, Boss& boss, Map& map);
@@ -14,7 +14,7 @@ private:
     Player& player;
     Boss& boss;
     Map& map;
-    //ÃÊ±â Ä³¸¯ÅÍ À§Ä¡ (1,1)
+    //ì´ˆê¸° ìºë¦­í„° ìœ„ì¹˜ (1,1)
     int playerX = 1;
     int playerY = 1;
 

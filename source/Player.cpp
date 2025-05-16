@@ -1,5 +1,5 @@
 #include "Player.h"
-//ÇÃ·¹ÀÌ¾î
+//í”Œë ˆì´ì–´
 Player::Player(std::string name)
     : Character(100, 30, 10), name(std::move(name)) {
-} //Ã¼·Â 100, °ø°İ·Â 30, ¹æ¾î·Â 10
+} //ì²´ë ¥ 100, ê³µê²©ë ¥ 30, ë°©ì–´ë ¥ 10

@@ -2,54 +2,54 @@
 #include <iostream>
 #include <cstdlib>
 #include <windows.h>
-//¸Ê
+//ë§µ
 Map::Map() {
     initialize();
 }
 
 void Map::initialize() 
 {
-    //¸ÊÀ» ' 'À¸·Î ÃÊ±âÈ­
+    //ë§µì„ ' 'ìœ¼ë¡œ ì´ˆê¸°í™”
     for (int y = 0; y < MAP_HEIGHT; ++y)
         for (int x = 0; x < MAP_WIDTH; ++x)
             tiles[y][x] = ' ';
-    //»ó´Ü, ÇÏ´Ü °æ°è
+    //ìƒë‹¨, í•˜ë‹¨ ê²½ê³„
     for (int x = 0; x < MAP_WIDTH; ++x)
         tiles[0][x] = tiles[MAP_HEIGHT - 1][x] = (x == 0 || x == MAP_WIDTH - 1) ? '|' : '-';
-    //ÁÂÃø, ¿ìÃø °æ°è
+    //ì¢Œì¸¡, ìš°ì¸¡ ê²½ê³„
     for (int y = 1; y < MAP_HEIGHT - 1; ++y) {
         tiles[y][0] = '|';
         tiles[y][MAP_WIDTH - 1] = '|';
     }
-    //º¸½º À§Ä¡
+    //ë³´ìŠ¤ ìœ„ì¹˜
     tiles[BOSS_Y][BOSS_X] = 'P';
 }
 
 void Map::print(const Player& player, int playerX, int playerY) {
     system("cls");
-    //ÁÖÀÎ°ø ÀÌ¸§, ÀÌµ¿¹æ¹ı Ãâ·Â
-    std::cout << "ÁÖÀÎ°ø : " << player.name << "\n";
-    std::cout << "ÀÌµ¿ : W(À§), A(¿ŞÂÊ), S(¾Æ·¡), D(¿À¸¥ÂÊ), Á¾·á: Q\n";
-    //¸Ê ¹× ÇöÁ¦ »óÅÂ Ãâ·Â
+    //ì£¼ì¸ê³µ ì´ë¦„, ì´ë™ë°©ë²• ì¶œë ¥
+    std::cout << "ì£¼ì¸ê³µ : " << player.name << "\n";
+    std::cout << "ì´ë™ : W(ìœ„), A(ì™¼ìª½), S(ì•„ë˜), D(ì˜¤ë¥¸ìª½), ì¢…ë£Œ: Q\n";
+    //ë§µ ë° í˜„ì œ ìƒíƒœ ì¶œë ¥
     for (int y = 0; y < MAP_HEIGHT; ++y) {
         for (int x = 0; x < MAP_WIDTH; ++x) {
             if (x == playerX && y == playerY)
-                std::cout << '@'; //ÇÃ·¹ÀÌ¾î À§Ä¡, Ãâ·Â
-            else if (y == BOSS_LABEL_Y && x >= BOSS_X - 4 && x < BOSS_X + 4) //º¸½º À§Ä¡, Ãâ·Â
-                std::cout << "<<boss>>"[x - (BOSS_X - 4)]; //º¸½º ¶óº§ À§Ä¡, Ãâ·Â
+                std::cout << '@'; //í”Œë ˆì´ì–´ ìœ„ì¹˜, ì¶œë ¥
+            else if (y == BOSS_LABEL_Y && x >= BOSS_X - 4 && x < BOSS_X + 4) //ë³´ìŠ¤ ìœ„ì¹˜, ì¶œë ¥
+                std::cout << "<<boss>>"[x - (BOSS_X - 4)]; //ë³´ìŠ¤ ë¼ë²¨ ìœ„ì¹˜, ì¶œë ¥
             else
-                std::cout << tiles[y][x]; //¸ÊÀÇ ±âº» Å¸ÀÏ Ãâ·Â : ' ', '-', '|'
+                std::cout << tiles[y][x]; //ë§µì˜ ê¸°ë³¸ íƒ€ì¼ ì¶œë ¥ : ' ', '-', '|'
         }
-        std::cout << "   "; //°ø¹é 3Ä­À¸·Î ¸Ê°ú ºĞ¸®
+        std::cout << "   "; //ê³µë°± 3ì¹¸ìœ¼ë¡œ ë§µê³¼ ë¶„ë¦¬
         if (y == 0)  std::cout << "==========================";
-        if (y == 1) std::cout << "Ã¼·Â : " << player.hp << " / " << player.maxHP << " HP";
-        else if (y == 2) std::cout << "¹æ¾î·Â : " << player.defense;
-        else if (y == 3) std::cout << "°øºÎ·Â : " << player.attack;
+        if (y == 1) std::cout << "ì²´ë ¥ : " << player.hp << " / " << player.maxHP << " HP";
+        else if (y == 2) std::cout << "ë°©ì–´ë ¥ : " << player.defense;
+        else if (y == 3) std::cout << "ê³µë¶€ë ¥ : " << player.attack;
         else if (y == 4) std::cout << "==========================";
-        else if (y == 5) std::cout << "ÀÎº¥Åä¸®";
-        else if (y == 6) std::cout << "Àü°øÃ¥";
-        else if (y == 7) std::cout << "°è»ê±â";
-        else if (y == 8) std::cout << "ÈŞ´ëÆù";
+        else if (y == 5) std::cout << "ì¸ë²¤í† ë¦¬";
+        else if (y == 6) std::cout << "ì „ê³µì±…";
+        else if (y == 7) std::cout << "ê³„ì‚°ê¸°";
+        else if (y == 8) std::cout << "íœ´ëŒ€í°";
         else if (y == 9) std::cout << "==========================";
         std::cout << std::endl;
     }

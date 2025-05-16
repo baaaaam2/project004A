@@ -3,7 +3,7 @@
 
 #include "Player.h"
 #include "Boss.h"
-//¹èÆ²½Ã½ºÅÛ Å¬·¡½º
+//ë°°í‹€ì‹œìŠ¤í…œ í´ë˜ìŠ¤
 class BattleSystem {
 public:
     void fight(Player& player, Boss& boss);

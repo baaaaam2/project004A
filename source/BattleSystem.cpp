@@ -2,29 +2,29 @@
 #include <iostream>
 #include <cstdlib>
 #include <windows.h>
-//¹èÆ²½Ã½ºÅÛ
+//ë°°í‹€ì‹œìŠ¤í…œ
 void BattleSystem::fight(Player& player, Boss& boss) {
     system("cls");
     char choice;
     bool fighting = true;
 
     while (fighting) {
-        // »ó´Ü »óÅÂ Ãâ·Â
-        std::cout << "±³¼ö : ÀÌ ¹®Á¦µµ Ç®¾îº¸½ÃÁö!\n";
+        // ìƒë‹¨ ìƒíƒœ ì¶œë ¥
+        std::cout << "êµìˆ˜ : ì´ ë¬¸ì œë„ í’€ì–´ë³´ì‹œì§€!\n";
         printStatus(player, boss);
 
-        // Çàµ¿ ¼±ÅÃ
-        std::cout << "1. ¹®Á¦ Ç®±â\n";
-        std::cout << "2. ¾ÆÀÌÅÛ »ç¿ë (¹Ì±¸Çö)\n¼±ÅÃ: ";
+        // í–‰ë™ ì„ íƒ
+        std::cout << "1. ë¬¸ì œ í’€ê¸°\n";
+        std::cout << "2. ì•„ì´í…œ ì‚¬ìš© (ë¯¸êµ¬í˜„)\nì„ íƒ: ";
         std::cin >> choice;
 
         if (choice == '1') {
             char atkChoice;
-            std::cout << "\n¾î¶² °ø°İÀ» »ç¿ëÇÒ±î¿ä?\n";
-            std::cout << "1. Ç®±â (30 µ¥¹ÌÁö, 70% ¼º°ø)\n";
-            std::cout << "2. Âï±â (50 µ¥¹ÌÁö, 50% ¼º°ø)\n";
-            std::cout << "3. ÄÁ´×ÇÏ±â (70 µ¥¹ÌÁö, 30% ¼º°ø)\n";
-            std::cout << "¼±ÅÃ: ";
+            std::cout << "\nì–´ë–¤ ê³µê²©ì„ ì‚¬ìš©í• ê¹Œìš”?\n";
+            std::cout << "1. í’€ê¸° (30 ë°ë¯¸ì§€, 70% ì„±ê³µ)\n";
+            std::cout << "2. ì°ê¸° (50 ë°ë¯¸ì§€, 50% ì„±ê³µ)\n";
+            std::cout << "3. ì»¨ë‹í•˜ê¸° (70 ë°ë¯¸ì§€, 30% ì„±ê³µ)\n";
+            std::cout << "ì„ íƒ: ";
             std::cin >> atkChoice;
 
             int damage = 0, successRate = 0;
@@ -34,35 +34,35 @@ void BattleSystem::fight(Player& player, Boss& boss) {
             case '3': damage = 70; successRate = 30; break;
             default: continue;
             }
-            // ÀüÅõ ÁøÇà
+            // ì „íˆ¬ ì§„í–‰
             system("cls");
             printStatus(player, boss);
-            attack(player, boss, damage, successRate, "ÁÖÀÎ°ø", "±³¼ö´Ô");
+            attack(player, boss, damage, successRate, "ì£¼ì¸ê³µ", "êµìˆ˜ë‹˜");
 
             if (boss.isDead()) {
                 std::cout << "====================\n";
-                std::cout << "½ÃÇèÁö¸¦ ´Ù Ç®¾ú½À´Ï´Ù!\n";
+                std::cout << "ì‹œí—˜ì§€ë¥¼ ë‹¤ í’€ì—ˆìŠµë‹ˆë‹¤!\n";
                 std::cout << "====================\n";
                 fighting = false;
                 continue;
             }
 
-            attack(boss, player, 30, 70, "º¸½º", "ÁÖÀÎ°ø");
+            attack(boss, player, 30, 70, "ë³´ìŠ¤", "ì£¼ì¸ê³µ");
 
             if (player.isDead()) {
                 system("cls");
                 std::cout << "====================\n";
-                std::cout << "¹®Á¦¸¦ ´Ù Ç®Áö ¸øÇß½À´Ï´Ù! °ÔÀÓ ¿À¹ö!\n";
+                std::cout << "ë¬¸ì œë¥¼ ë‹¤ í’€ì§€ ëª»í–ˆìŠµë‹ˆë‹¤! ê²Œì„ ì˜¤ë²„!\n";
                 std::cout << "====================\n";
                 fighting = false;
             }
         }
         else if(choice == '2'){
-            std::cout << "¾ÆÀÌÅÛ ±â´ÉÀº ¾ÆÁ÷ ±¸ÇöµÇÁö ¾Ê¾Ò½À´Ï´Ù.\n";
-            Sleep(1500); //1.5ÃÊ Á¤Áö
+            std::cout << "ì•„ì´í…œ ê¸°ëŠ¥ì€ ì•„ì§ êµ¬í˜„ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n";
+            Sleep(1500); //1.5ì´ˆ ì •ì§€
         }
 
-        // Çàµ¿ ÈÄ È­¸é ¸®¼Â (HP¸¸ À¯Áö)
+        // í–‰ë™ í›„ í™”ë©´ ë¦¬ì…‹ (HPë§Œ ìœ ì§€)
         if (fighting)
         {
             system("cls");
@@ -71,15 +71,15 @@ void BattleSystem::fight(Player& player, Boss& boss) {
 }
 
 void BattleSystem::attack(Character& attacker, Character& defender, int damage, int successRate, const std::string& attackerName, const std::string& defenderName) {
-    std::cout << attackerName << "ÀÇ °ø°İ!\n";
+    std::cout << attackerName << "ì˜ ê³µê²©!\n";
     if (isAttackSuccessful(successRate)) {
         defender.takeDamage(damage);
-        std::cout << "°ø°İ ¼º°ø! " << defenderName << "¿¡°Ô " << damage << " ÇÇÇØ!\n";
+        std::cout << "ê³µê²© ì„±ê³µ! " << defenderName << "ì—ê²Œ " << damage << " í”¼í•´!\n";
     }
     else {
-        std::cout << "°ø°İ ½ÇÆĞ!\n";
+        std::cout << "ê³µê²© ì‹¤íŒ¨!\n";
     }
-    Sleep(1500); //1.5ÃÊ Á¤Áö
+    Sleep(1500); //1.5ì´ˆ ì •ì§€
 }
 
 bool BattleSystem::isAttackSuccessful(int successRate) {
@@ -88,7 +88,7 @@ bool BattleSystem::isAttackSuccessful(int successRate) {
 
 void BattleSystem::printStatus(const Player& player, const Boss& boss) {
     std::cout << "====================\n";
-    std::cout << "ÇÃ·¹ÀÌ¾î : " << player.hp << " / " << player.maxHP << " HP\n";
-    std::cout << "±³¼ö´Ô : " << boss.hp << " / " << boss.maxHP << " HP\n";
+    std::cout << "í”Œë ˆì´ì–´ : " << player.hp << " / " << player.maxHP << " HP\n";
+    std::cout << "êµìˆ˜ë‹˜ : " << boss.hp << " / " << boss.maxHP << " HP\n";
     std::cout << "====================\n\n";
 }

@@ -2,7 +2,7 @@
 #define BOSS_H
 
 #include "Character.h"
-//º¸½º Å¬·¡½º <= Ä³¸¯ÅÍ »ó¼Ó
+//ë³´ìŠ¤ í´ëž˜ìŠ¤ <= ìºë¦­í„° ìƒì†
 class Boss : public Character {
 public:
     Boss();

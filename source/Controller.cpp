@@ -11,8 +11,8 @@ Controller::Controller(Player& player, Boss& boss, Map& map)
 void Controller::startGame() 
 {
     srand(static_cast<unsigned>(time(0)));
-    std::cout << "ÁÖÀÎ°øÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ";
-    std::getline(std::cin, player.name); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ ¼³Á¤
+    std::cout << "ì£¼ì¸ê³µì˜ ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš”: ";
+    std::getline(std::cin, player.name); //í”Œë ˆì´ì–´ ì´ë¦„ ì„¤ì •
 
     map.initialize();
     char input;
@@ -23,7 +23,7 @@ void Controller::startGame()
         map.print(player, playerX, playerY);
         input = _getch();
 
-        if (input == 'q' || input == 'Q') //q ÀÔ·Â½Ã Á¾·á
+        if (input == 'q' || input == 'Q') //q ìž…ë ¥ì‹œ ì¢…ë£Œ
         {
             running = false;
         }
@@ -38,17 +38,17 @@ void Controller::startGame()
         }
     }
 
-    std::cout << "°ÔÀÓ Á¾·á!" << std::endl;
+    std::cout << "ê²Œìž„ ì¢…ë£Œ!" << std::endl;
 }
 
 bool Controller::movePlayer(char input) 
 {
     int newX = playerX, newY = playerY;
     switch (input) {
-    case 'w': case 'W': newY--; break; //w,W ÀÔ·Â½Ã Y-1 (À§·Î)
-    case 's': case 'S': newY++; break; //s,S ÀÔ·Â½Ã Y+1 (¹ØÀ¸·Î)
-    case 'a': case 'A': newX--; break; //a,A ÀÔ·Â½Ã X-1 (¿ÞÂÊÀ¸·Î)
-    case 'd': case 'D': newX++; break; //d,D ÀÔ·Â½Ã X+1 (¿À¸¥ÂÊÀ¸·Î)
+    case 'w': case 'W': newY--; break; //w,W ìž…ë ¥ì‹œ Y-1 (ìœ„ë¡œ)
+    case 's': case 'S': newY++; break; //s,S ìž…ë ¥ì‹œ Y+1 (ë°‘ìœ¼ë¡œ)
+    case 'a': case 'A': newX--; break; //a,A ìž…ë ¥ì‹œ X-1 (ì™¼ìª½ìœ¼ë¡œ)
+    case 'd': case 'D': newX++; break; //d,D ìž…ë ¥ì‹œ X+1 (ì˜¤ë¥¸ìª½ìœ¼ë¡œ)
     default: return false;
     }
 
