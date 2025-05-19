@@ -4,6 +4,8 @@
 #include <conio.h>
 #include <ctime>
 
+using namespace std;
+
 Controller::Controller(Player& player, Boss& boss, Map& map)
     : player(player), boss(boss), map(map) {
 }
@@ -11,8 +13,8 @@ Controller::Controller(Player& player, Boss& boss, Map& map)
 void Controller::startGame() 
 {
     srand(static_cast<unsigned>(time(0)));
-    std::cout << "주인공의 이름을 입력하세요: ";
-    std::getline(std::cin, player.name); //플레이어 이름 설정
+    cout << "주인공의 이름을 입력하세요: ";
+    getline(std::cin, player.name); //플레이어 이름 설정
 
     map.initialize();
     char input;
@@ -38,7 +40,7 @@ void Controller::startGame()
         }
     }
 
-    std::cout << "게임 종료!" << std::endl;
+    cout << "게임 종료!" << std::endl;
 }
 
 bool Controller::movePlayer(char input) 
