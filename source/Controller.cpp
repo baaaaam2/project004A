@@ -1,8 +1,12 @@
 #include "Controller.h"
+#include "Player.h"
 #include "BattleSystem.h"
+#include "StorySystem.h"
 #include <iostream>
 #include <conio.h>
 #include <ctime>
+
+using namespace std;
 
 Controller::Controller(Player& player, Boss& boss, Map& map)
     : player(player), boss(boss), map(map) {
@@ -11,12 +15,16 @@ Controller::Controller(Player& player, Boss& boss, Map& map)
 void Controller::startGame() 
 {
     srand(static_cast<unsigned>(time(0)));
-    std::cout << "주인공의 이름을 입력하세요: ";
-    std::getline(std::cin, player.name); //플레이어 이름 설정
+    cout << "주인공의 이름을 입력하세요: ";
+    getline(cin, player.name); //플레이어 이름 설정
+    system("cls");
+
+    printStartStory(player); // StorySystem.h에서 호출
 
     map.initialize();
     char input;
     bool running = true;
+    char grade = 'F'; // 초기 학점
 
     while (running) 
     {
@@ -31,14 +39,25 @@ void Controller::startGame()
         {
             if (map.getTile(playerX, playerY) == 'P') 
             {
+                printBossEncounterStory(player);
                 BattleSystem bs;
-                bs.fight(player, boss);
+                bs.fight(player, boss, grade);
+                // 전투 결과에 따라 스토리 출력
+                if (boss.isDead()) 
+                {
+                    showEnding(player, grade); //엔딩 출력
+                    printWinStory(player);
+                }
+                else if (player.isDead()) 
+                {
+                    showEnding(player, grade); //엔딩 출력
+                    printLoseStory(player);
+                }
                 running = false;
             }
         }
     }
-
-    std::cout << "게임 종료!" << std::endl;
+    cout << "\n게임 종료!" << endl;
 }
 
 bool Controller::movePlayer(char input) 

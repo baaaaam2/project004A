@@ -3,7 +3,8 @@
 #include <cstdlib>
 #include <windows.h>
 //배틀시스템
-void BattleSystem::fight(Player& player, Boss& boss) {
+void BattleSystem::fight(Player& player, Boss& boss, char& grade) //char& grade 추가
+{
     system("cls");
     char choice;
     bool fighting = true;
@@ -40,9 +41,17 @@ void BattleSystem::fight(Player& player, Boss& boss) {
             attack(player, boss, damage, successRate, "주인공", "교수님");
 
             if (boss.isDead()) {
+<<<<<<< Updated upstream
                 std::cout << "====================\n";
                 std::cout << "시험지를 다 풀었습니다!\n";
                 std::cout << "====================\n";
+=======
+                cout << "\n====================\n";
+                cout << "시험지를 다 풀었습니다!\n";
+                cout << "====================\n";
+                if (player.hp >= 70) grade = 'A'; // 체력 70 이상: A학점
+                else if (player.hp > 0) grade = 'B'; // 체력 1~69: B학점
+>>>>>>> Stashed changes
                 fighting = false;
                 continue;
             }
@@ -51,9 +60,16 @@ void BattleSystem::fight(Player& player, Boss& boss) {
 
             if (player.isDead()) {
                 system("cls");
+<<<<<<< Updated upstream
                 std::cout << "====================\n";
                 std::cout << "문제를 다 풀지 못했습니다! 게임 오버!\n";
                 std::cout << "====================\n";
+=======
+                cout << "\n====================\n";
+                cout << "문제를 다 풀지 못했습니다! 게임 오버!\n";
+                cout << "====================\n";
+                grade = 'C'; // 패배: C학점
+>>>>>>> Stashed changes
                 fighting = false;
             }
         }
@@ -70,8 +86,8 @@ void BattleSystem::fight(Player& player, Boss& boss) {
     }
 }
 
-void BattleSystem::attack(Character& attacker, Character& defender, int damage, int successRate, const std::string& attackerName, const std::string& defenderName) {
-    std::cout << attackerName << "의 공격!\n";
+void BattleSystem::attack(Character& attacker, Character& defender, int damage, int successRate, const string& attackerName, const string& defenderName) {
+    cout << attackerName << "의 공격!\n";
     if (isAttackSuccessful(successRate)) {
         defender.takeDamage(damage);
         std::cout << "공격 성공! " << defenderName << "에게 " << damage << " 피해!\n";
