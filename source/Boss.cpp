@@ -1,5 +1,6 @@
 #include "Boss.h"
 //보스
-Boss::Boss()
-    : Character(100, 30, 10) {
-} //체력 100, 공격력 30, 방어력 10
+Boss::Boss(const std::string& name, int maxHP, int attack, int defense)
+	: Character(maxHP, attack, defense), name(name) { 
+	// 보스의 체력, 공격력, 방어력 설정
+}

@@ -8,17 +8,16 @@
 
 using namespace std;
 
-Controller::Controller(Player& player, Boss& boss, Map& map)
-    : player(player), boss(boss), map(map) {
+Controller::Controller(Player& player, vector<Boss> bosses, Map& map)
+    : player(player), bosses(move(bosses)), map(map) {
 }
 
-void Controller::startGame() 
+void Controller::startGame()
 {
     srand(static_cast<unsigned>(time(0)));
     cout << "주인공의 이름을 입력하세요: ";
     getline(cin, player.name); //플레이어 이름 설정
     system("cls");
-
     printStartStory(player); // StorySystem.h에서 호출
 
     map.initialize();
@@ -37,13 +36,13 @@ void Controller::startGame()
         }
         else if (movePlayer(input)) 
         {
-            if (map.getTile(playerX, playerY) == 'P') 
+            if (map.getTile(playerX, playerY) == 'B') 
             {
                 printBossEncounterStory(player);
                 BattleSystem bs;
-                bs.fight(player, boss, grade);
+                bs.fight(player, bosses[0], grade);
                 // 전투 결과에 따라 스토리 출력
-                if (boss.isDead()) 
+                if (bosses[0].isDead())
                 {
                     showEnding(player, grade); //엔딩 출력
                     printWinStory(player);
@@ -71,10 +70,23 @@ bool Controller::movePlayer(char input)
     default: return false;
     }
 
-    if (map.getTile(newX, newY) != '|' && map.getTile(newX, newY) != '-') 
+    if (map.getTile(newX, newY) != '|' && map.getTile(newX, newY) != '-' && map.getTile(newX, newY) != '+')
     {
         playerX = newX;
         playerY = newY;
+
+        int chance = rand() % 100; // 랜덤 확률 생성
+        if (chance < 0) { //확률 바꾸기
+            int friendindex = 3 + rand() % 3; // 친구 보스 중 하나 선택
+            std::cout << bosses[friendindex].name << "와(과) 조우했습니다!\n";
+            BattleSystem bs;
+            bs.fightfriend(player, bosses[friendindex]);
+            // 플레이어가 죽었으면 이동 실패 처리
+            if (player.isDead()) {
+                std::cout << "플레이어가 사망했습니다.\n";
+                return false;
+            }
+        }
         return true;
     }
     return false;

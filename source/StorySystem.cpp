@@ -10,7 +10,7 @@ void printLine(const string& line) {
     for (char c : line) {
         cout << c;
         cout.flush(); // 출력 버퍼 즉시 비움
-        Sleep(50); // 50ms 대기 (0.5초)
+        Sleep(1); // 40ms 대기 (0.4초)
     }
     cout << endl;
 }

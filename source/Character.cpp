@@ -12,3 +12,6 @@ void Character::takeDamage(int amount) {
 bool Character::isDead() const {
     return hp <= 0;
 }
+bool Character::isAlive() const {
+    return hp > 0;
+}
