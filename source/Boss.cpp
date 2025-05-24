@@ -1,6 +1,6 @@
 #include "Boss.h"
-//ë³´ìŠ¤
+//º¸½º
 Boss::Boss(const std::string& name, int maxHP, int attack, int defense)
 	: Character(maxHP, attack, defense), name(name) { 
-	// ë³´ìŠ¤ì˜ ì²´ë ¥, ê³µê²©ë ¥, ë°©ì–´ë ¥ ì„¤ì •
+	// º¸½ºÀÇ Ã¼·Â, °ø°İ·Â, ¹æ¾î·Â ¼³Á¤
 }

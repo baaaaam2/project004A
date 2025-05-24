@@ -1,14 +1,14 @@
 #include "Character.h"
-//ìºë¦­í„°
+//Ä³¸¯ÅÍ
 Character::Character(int maxHP, int attack, int defense)
     : maxHP(maxHP), hp(maxHP), attack(attack), defense(defense) {
 }
-//ë°ë¯¸ì§€ë¥¼ ë°›ëŠ” í•¨ìˆ˜
+//µ¥¹ÌÁö¸¦ ¹Ş´Â ÇÔ¼ö
 void Character::takeDamage(int amount) {
     hp -= amount;
     if (hp < 0) hp = 0;
 }
-//ì£½ìŒ ê°ì§€
+//Á×À½ °¨Áö
 bool Character::isDead() const {
     return hp <= 0;
 }

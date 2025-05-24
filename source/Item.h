@@ -9,7 +9,7 @@ class Item {
 private:
     string name;
     int price;
-    int healAmount; // íšŒë³µ ì•„ì´í…œì¼ ê²½ìš°
+    int healAmount; // È¸º¹ ¾ÆÀÌÅÛÀÏ °æ¿ì
 
 public:
     Item(string name, int price, int healAmount);

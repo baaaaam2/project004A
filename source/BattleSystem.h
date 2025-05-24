@@ -5,18 +5,18 @@
 #include "Boss.h"
 #include <string>
 
-//ë°°í‹€ì‹œìŠ¤í…œ í´ë˜ìŠ¤
+//¹èÆ²½Ã½ºÅÛ Å¬·¡½º
 using namespace std;
 
 class BattleSystem {
 public:
-    void fight(Player& player, Boss& boss, char& grade);// ë³´ìŠ¤ì™€ ì „íˆ¬ì‹œì‘
-    void fightfriend(Player& player, Boss& boss); // ì¹œêµ¬(ì¤‘ê°„ë³´ìŠ¤)ì™€ì˜ ì „íˆ¬ ì‹œì‘
+    void fight(Player& player, Boss& boss, char& grade);// º¸½º¿Í ÀüÅõ½ÃÀÛ
+    void fightfriend(Player& player, Boss& boss); // Ä£±¸(Áß°£º¸½º)¿ÍÀÇ ÀüÅõ ½ÃÀÛ
 
 private:
     void attack(Character& attacker, Character& defender, int damage, int successRate, const string& attackerName, const string& defenderName);
-    bool isAttackSuccessful(int successRate); //ê³µê²© ì„±ê³µ ì—¬ë¶€ íŒë‹¨
-    void printStatus(const Player& player, const Boss& boss); //ìƒíƒœ ì¶œë ¥
+    bool isAttackSuccessful(int successRate); //°ø°İ ¼º°ø ¿©ºÎ ÆÇ´Ü
+    void printStatus(const Player& player, const Boss& boss); //»óÅÂ Ãâ·Â
 };
 
 #endif

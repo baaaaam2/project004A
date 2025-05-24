@@ -15,22 +15,22 @@ Controller::Controller(Player& player, vector<Boss> bosses, Map& map)
 void Controller::startGame()
 {
     srand(static_cast<unsigned>(time(0)));
-    cout << "ì£¼ì¸ê³µì˜ ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš”: ";
-    getline(cin, player.name); //í”Œë ˆì´ì–´ ì´ë¦„ ì„¤ì •
+    cout << "ÁÖÀÎ°øÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ";
+    getline(cin, player.name); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ ¼³Á¤
     system("cls");
-    printStartStory(player); // StorySystem.hì—ì„œ í˜¸ì¶œ
+    printStartStory(player); // StorySystem.h¿¡¼­ È£Ãâ
 
     map.initialize();
     char input;
     bool running = true;
-    char grade = 'F'; // ì´ˆê¸° í•™ì 
+    char grade = 'F'; // ÃÊ±â ÇÐÁ¡
 
     while (running) 
     {
         map.print(player, playerX, playerY);
         input = _getch();
 
-        if (input == 'q' || input == 'Q') //q ìž…ë ¥ì‹œ ì¢…ë£Œ
+        if (input == 'q' || input == 'Q') //q ÀÔ·Â½Ã Á¾·á
         {
             running = false;
         }
@@ -41,32 +41,32 @@ void Controller::startGame()
                 printBossEncounterStory(player);
                 BattleSystem bs;
                 bs.fight(player, bosses[0], grade);
-                // ì „íˆ¬ ê²°ê³¼ì— ë”°ë¼ ìŠ¤í† ë¦¬ ì¶œë ¥
+                // ÀüÅõ °á°ú¿¡ µû¶ó ½ºÅä¸® Ãâ·Â
                 if (bosses[0].isDead())
                 {
-                    showEnding(player, grade); //ì—”ë”© ì¶œë ¥
+                    showEnding(player, grade); //¿£µù Ãâ·Â
                     printWinStory(player);
                 }
                 else if (player.isDead()) 
                 {
-                    showEnding(player, grade); //ì—”ë”© ì¶œë ¥
+                    showEnding(player, grade); //¿£µù Ãâ·Â
                     printLoseStory(player);
                 }
                 running = false;
             }
         }
     }
-    cout << "\nê²Œìž„ ì¢…ë£Œ!" << endl;
+    cout << "\n°ÔÀÓ Á¾·á!" << endl;
 }
 
 bool Controller::movePlayer(char input) 
 {
     int newX = playerX, newY = playerY;
     switch (input) {
-    case 'w': case 'W': newY--; break; //w,W ìž…ë ¥ì‹œ Y-1 (ìœ„ë¡œ)
-    case 's': case 'S': newY++; break; //s,S ìž…ë ¥ì‹œ Y+1 (ë°‘ìœ¼ë¡œ)
-    case 'a': case 'A': newX--; break; //a,A ìž…ë ¥ì‹œ X-1 (ì™¼ìª½ìœ¼ë¡œ)
-    case 'd': case 'D': newX++; break; //d,D ìž…ë ¥ì‹œ X+1 (ì˜¤ë¥¸ìª½ìœ¼ë¡œ)
+    case 'w': case 'W': newY--; break; //w,W ÀÔ·Â½Ã Y-1 (À§·Î)
+    case 's': case 'S': newY++; break; //s,S ÀÔ·Â½Ã Y+1 (¹ØÀ¸·Î)
+    case 'a': case 'A': newX--; break; //a,A ÀÔ·Â½Ã X-1 (¿ÞÂÊÀ¸·Î)
+    case 'd': case 'D': newX++; break; //d,D ÀÔ·Â½Ã X+1 (¿À¸¥ÂÊÀ¸·Î)
     default: return false;
     }
 
@@ -75,15 +75,15 @@ bool Controller::movePlayer(char input)
         playerX = newX;
         playerY = newY;
 
-        int chance = rand() % 100; // ëžœë¤ í™•ë¥  ìƒì„±
-        if (chance < 0) { //í™•ë¥  ë°”ê¾¸ê¸°
-            int friendindex = 3 + rand() % 3; // ì¹œêµ¬ ë³´ìŠ¤ ì¤‘ í•˜ë‚˜ ì„ íƒ
-            std::cout << bosses[friendindex].name << "ì™€(ê³¼) ì¡°ìš°í–ˆìŠµë‹ˆë‹¤!\n";
+        int chance = rand() % 100; // ·£´ý È®·ü »ý¼º
+        if (chance < 0) { //È®·ü ¹Ù²Ù±â
+            int friendindex = 3 + rand() % 3; // Ä£±¸ º¸½º Áß ÇÏ³ª ¼±ÅÃ
+            std::cout << bosses[friendindex].name << "¿Í(°ú) Á¶¿ìÇß½À´Ï´Ù!\n";
             BattleSystem bs;
             bs.fightfriend(player, bosses[friendindex]);
-            // í”Œë ˆì´ì–´ê°€ ì£½ì—ˆìœ¼ë©´ ì´ë™ ì‹¤íŒ¨ ì²˜ë¦¬
+            // ÇÃ·¹ÀÌ¾î°¡ Á×¾úÀ¸¸é ÀÌµ¿ ½ÇÆÐ Ã³¸®
             if (player.isDead()) {
-                std::cout << "í”Œë ˆì´ì–´ê°€ ì‚¬ë§í–ˆìŠµë‹ˆë‹¤.\n";
+                std::cout << "ÇÃ·¹ÀÌ¾î°¡ »ç¸ÁÇß½À´Ï´Ù.\n";
                 return false;
             }
         }

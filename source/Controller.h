@@ -10,7 +10,7 @@
 
 using namespace std;
 
-//ì»¨íŠ¸ë¡¤ëŸ¬ í´ë˜ìŠ¤
+//ÄÁÆ®·Ñ·¯ Å¬·¡½º
 class Controller {
 public:
     Controller(Player& player, vector<Boss> bosses, Map& map);
@@ -20,7 +20,7 @@ private:
     Player& player;
     vector<Boss> bosses;
     Map& map;
-    //ì´ˆê¸° ìºë¦­í„° ìœ„ì¹˜ (1,1)
+    //ÃÊ±â Ä³¸¯ÅÍ À§Ä¡ (1,1)
     int playerX = 1;
     int playerY = 1;
 

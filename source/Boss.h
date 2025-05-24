@@ -6,13 +6,13 @@
 
 using namespace std;
 
-//ë³´ìŠ¤ í´ë˜ìŠ¤ <= ìºë¦­í„° ìƒì†
+//º¸½º Å¬·¡½º <= Ä³¸¯ÅÍ »ó¼Ó
 class Boss : public Character {
 public:
     Boss(const string& name, int maxHP, int attack, int defense);
     string name;
 
-    string getName() const { return name; } // ë³´ìŠ¤ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
+    string getName() const { return name; } // º¸½º ÀÌ¸§ °¡Á®¿À±â
 };
 
 #endif

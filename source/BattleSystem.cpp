@@ -6,40 +6,40 @@
 
 using namespace std;
 
-//êµìˆ˜ë‹˜(ë³´ìŠ¤) ë°°í‹€ì‹œìŠ¤í…œ
-void BattleSystem::fight(Player& player, Boss& boss, char& grade) //char& grade ì¶”ê°€
+//±³¼ö´Ô(º¸½º) ¹èÆ²½Ã½ºÅÛ
+void BattleSystem::fight(Player& player, Boss& boss, char& grade) //char& grade Ãß°¡
 {
     system("cls");
     char choice;
     int turn = 1;
     bool fighting = true;
 
-    cout << player.getName() << "(ì´)ê°€ " << boss.getName() << "ì—ê²Œ ì‹œí—˜ì§€ë¥¼ ë°›ì•˜ë‹¤!\n";
+    cout << player.getName() << "(ÀÌ)°¡ " << boss.getName() << "¿¡°Ô ½ÃÇèÁö¸¦ ¹Ş¾Ò´Ù!\n";
     Sleep(1000);
     system("cls");
 
     while (player.isAlive() && boss.isAlive() && turn <= MAX_TURNS) 
     {
-        // ìƒë‹¨ ìƒíƒœ ì¶œë ¥
-        cout << boss.getName() << " : ì´ ë¬¸ì œë„ í’€ì–´ë³´ì‹œì§€!\n";
+        // »ó´Ü »óÅÂ Ãâ·Â
+        cout << boss.getName() << " : ÀÌ ¹®Á¦µµ Ç®¾îº¸½ÃÁö!\n";
 
-        cout << "======= ì „íˆ¬ í™”ë©´ ======\n";
-        cout << "[ë‚¨ì€ ì‹œí—˜ ì‹œê°„ " << turn << " / " << MAX_TURNS << "]\n";
+        cout << "======= ÀüÅõ È­¸é ======\n";
+        cout << "[³²Àº ½ÃÇè ½Ã°£ " << turn << " / " << MAX_TURNS << "]\n";
 
         printStatus(player, boss);
 
-        // í–‰ë™ ì„ íƒ
-        cout << "1. ë¬¸ì œ í’€ê¸°\n";
-        cout << "2. ì•„ì´í…œ ì‚¬ìš© (ë¯¸êµ¬í˜„)\nì„ íƒ: ";
+        // Çàµ¿ ¼±ÅÃ
+        cout << "1. ¹®Á¦ Ç®±â\n";
+        cout << "2. ¾ÆÀÌÅÛ »ç¿ë (¹Ì±¸Çö)\n¼±ÅÃ: ";
         cin >> choice;
 
         if (choice == '1') {
             char atkChoice;
-            cout << "\nì–´ë–¤ ê³µê²©ì„ ì‚¬ìš©í• ê¹Œìš”?\n";
-            cout << "1. í’€ê¸° (30 ë°ë¯¸ì§€, 70% ì„±ê³µ)\n";
-            cout << "2. ì°ê¸° (50 ë°ë¯¸ì§€, 50% ì„±ê³µ)\n";
-            cout << "3. ì»¨ë‹í•˜ê¸° (70 ë°ë¯¸ì§€, 30% ì„±ê³µ)\n";
-            cout << "ì„ íƒ: ";
+            cout << "\n¾î¶² °ø°İÀ» »ç¿ëÇÒ±î¿ä?\n";
+            cout << "1. Ç®±â (30 µ¥¹ÌÁö, 70% ¼º°ø)\n";
+            cout << "2. Âï±â (50 µ¥¹ÌÁö, 50% ¼º°ø)\n";
+            cout << "3. ÄÁ´×ÇÏ±â (70 µ¥¹ÌÁö, 30% ¼º°ø)\n";
+            cout << "¼±ÅÃ: ";
             cin >> atkChoice;
 
             int damage = 0, successRate = 0;
@@ -49,44 +49,44 @@ void BattleSystem::fight(Player& player, Boss& boss, char& grade) //char& grade 
             case '3': damage = 70; successRate = 30; break;
             default: continue;
             }
-            // ì „íˆ¬ ì§„í–‰
+            // ÀüÅõ ÁøÇà
             system("cls");
             printStatus(player, boss);
-            attack(player, boss, damage, successRate, "ì£¼ì¸ê³µ", "êµìˆ˜ë‹˜");
+            attack(player, boss, damage, successRate, "ÁÖÀÎ°ø", "±³¼ö´Ô");
 
             if (boss.isDead()) {
                 cout << "\n====================\n";
-                cout << "ì‹œí—˜ì§€ë¥¼ ë‹¤ í’€ì—ˆìŠµë‹ˆë‹¤!\n";
+                cout << "½ÃÇèÁö¸¦ ´Ù Ç®¾ú½À´Ï´Ù!\n";
                 cout << "====================\n";
-                if (player.hp >= 70) grade = 'A'; // ì²´ë ¥ 70 ì´ìƒ: Aí•™ì 
-                else if (player.hp > 0) grade = 'B'; // ì²´ë ¥ 1~69: Bí•™ì 
+                if (player.hp >= 70) grade = 'A'; // Ã¼·Â 70 ÀÌ»ó: AÇĞÁ¡
+                else if (player.hp > 0) grade = 'B'; // Ã¼·Â 1~69: BÇĞÁ¡
                 fighting = false;
                 continue;
             }
 
-            attack(boss, player, 30, 70, "ë³´ìŠ¤", "ì£¼ì¸ê³µ");
+            attack(boss, player, 30, 70, "º¸½º", "ÁÖÀÎ°ø");
 
             if (player.isDead()) {
                 system("cls");
                 cout << "\n====================\n";
-                cout << "ë¬¸ì œë¥¼ ë‹¤ í’€ì§€ ëª»í–ˆìŠµë‹ˆë‹¤! ê²Œì„ ì˜¤ë²„!\n";
+                cout << "¹®Á¦¸¦ ´Ù Ç®Áö ¸øÇß½À´Ï´Ù! °ÔÀÓ ¿À¹ö!\n";
                 cout << "====================\n";
-                grade = 'C'; // íŒ¨ë°°: Cí•™ì 
+                grade = 'C'; // ÆĞ¹è: CÇĞÁ¡
                 fighting = false;
             }
         }
         else if(choice == '2')
         {
-            cout << "ì•„ì´í…œ ê¸°ëŠ¥ì€ ì•„ì§ êµ¬í˜„ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n";
-            Sleep(1500); //1.5ì´ˆ ì •ì§€
+            cout << "¾ÆÀÌÅÛ ±â´ÉÀº ¾ÆÁ÷ ±¸ÇöµÇÁö ¾Ê¾Ò½À´Ï´Ù.\n";
+            Sleep(1500); //1.5ÃÊ Á¤Áö
         }
         else if (choice != 2 || choice != 1)
         {
-            cout << "ì•Œë§ì€ ì˜µì…˜ì„ ì„ íƒí•´ì£¼ì„¸ìš”.\n";
+            cout << "¾Ë¸ÂÀº ¿É¼ÇÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.\n";
             Sleep(1500);
         }
 
-        // í–‰ë™ í›„ í™”ë©´ ë¦¬ì…‹ (HPë§Œ ìœ ì§€)
+        // Çàµ¿ ÈÄ È­¸é ¸®¼Â (HP¸¸ À¯Áö)
         if (fighting)
         {
             system("cls");
@@ -95,25 +95,25 @@ void BattleSystem::fight(Player& player, Boss& boss, char& grade) //char& grade 
     }
 }
 
-//ì¹œêµ¬(ì¤‘ê°„ë³´ìŠ¤) ë°°í‹€ì‹œìŠ¤í…œ
+//Ä£±¸(Áß°£º¸½º) ¹èÆ²½Ã½ºÅÛ
 void BattleSystem::fightfriend(Player& player, Boss& boss)
 {
     system("cls");
     char choice;
     bool fighting = true;
 
-    std::cout << player.getName() << "(ì´)ê°€ " << boss.getName() << "ì—ê²Œ ì§ˆë¬¸ì„ ë°›ì•˜ë‹¤!\n";
+    std::cout << player.getName() << "(ÀÌ)°¡ " << boss.getName() << "¿¡°Ô Áú¹®À» ¹Ş¾Ò´Ù!\n";
     Sleep(1000);
 
     while (fighting) {
-        std::cout << boss.getName() << " : ì´ê±° ì–´ë–»ê²Œ í’€ì–´?\n" << std::endl;
+        std::cout << boss.getName() << " : ÀÌ°Å ¾î¶»°Ô Ç®¾î?\n" << std::endl;
         printStatus(player, boss);
-        std::cout << "1. ë¬¸ì œ í’€ê¸°\n";
-        std::cout << "2. ì•„ì´í…œ ì‚¬ìš© (ë¯¸êµ¬í˜„)\nì„ íƒ: ";
+        std::cout << "1. ¹®Á¦ Ç®±â\n";
+        std::cout << "2. ¾ÆÀÌÅÛ »ç¿ë (¹Ì±¸Çö)\n¼±ÅÃ: ";
         std::cin >> choice;
         if (choice == '1') {
             char atkChoice;
-            std::cout << "1. í’€ê¸° (30, 70%)\n2. ì°ê¸° (50, 50%)\n3. ì»¨ë‹ (70, 30%)\nì„ íƒ: ";
+            std::cout << "1. Ç®±â (30, 70%)\n2. Âï±â (50, 50%)\n3. ÄÁ´× (70, 30%)\n¼±ÅÃ: ";
             std::cin >> atkChoice;
             int damage = 0, successRate = 0;
             switch (atkChoice) {
@@ -124,20 +124,20 @@ void BattleSystem::fightfriend(Player& player, Boss& boss)
             }
             system("cls");
             printStatus(player, boss);
-            attack(player, boss, damage, successRate, "ì£¼ì¸ê³µ", "ì¹œêµ¬");
+            attack(player, boss, damage, successRate, "ÁÖÀÎ°ø", "Ä£±¸");
             if (boss.isDead()) {
-                std::cout << "ì‹œí—˜ì§€ë¥¼ ë‹¤ í’€ì—ˆìŠµë‹ˆë‹¤!\n";
+                std::cout << "½ÃÇèÁö¸¦ ´Ù Ç®¾ú½À´Ï´Ù!\n";
                 fighting = false;
                 continue;
             }
-            attack(boss, player, 30, 70, "ë³´ìŠ¤", "ì£¼ì¸ê³µ");
+            attack(boss, player, 30, 70, "º¸½º", "ÁÖÀÎ°ø");
             if (player.isDead()) {
-                std::cout << "ë¬¸ì œë¥¼ ë‹¤ í’€ì§€ ëª»í–ˆìŠµë‹ˆë‹¤! ê²Œì„ ì˜¤ë²„!\n";
+                std::cout << "¹®Á¦¸¦ ´Ù Ç®Áö ¸øÇß½À´Ï´Ù! °ÔÀÓ ¿À¹ö!\n";
                 fighting = false;
             }
         }
         else {
-            std::cout << "ì•„ì´í…œ ê¸°ëŠ¥ì€ ì•„ì§ êµ¬í˜„ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n";
+            std::cout << "¾ÆÀÌÅÛ ±â´ÉÀº ¾ÆÁ÷ ±¸ÇöµÇÁö ¾Ê¾Ò½À´Ï´Ù.\n";
             Sleep(1500);
         }
         if (fighting) system("cls");
@@ -145,15 +145,15 @@ void BattleSystem::fightfriend(Player& player, Boss& boss)
 }
 
 void BattleSystem::attack(Character& attacker, Character& defender, int damage, int successRate, const string& attackerName, const string& defenderName) {
-    cout << attackerName << "ì˜ ê³µê²©!\n";
+    cout << attackerName << "ÀÇ °ø°İ!\n";
     if (isAttackSuccessful(successRate)) {
         defender.takeDamage(damage);
-        cout << "ê³µê²© ì„±ê³µ! " << defenderName << "ì—ê²Œ " << damage << " í”¼í•´!\n";
+        cout << "°ø°İ ¼º°ø! " << defenderName << "¿¡°Ô " << damage << " ÇÇÇØ!\n";
     }
     else {
-        cout << "ê³µê²© ì‹¤íŒ¨!\n";
+        cout << "°ø°İ ½ÇÆĞ!\n";
     }
-    Sleep(1000); //1ì´ˆ ì •ì§€
+    Sleep(1000); //1ÃÊ Á¤Áö
 }
 
 bool BattleSystem::isAttackSuccessful(int successRate) {
@@ -162,7 +162,7 @@ bool BattleSystem::isAttackSuccessful(int successRate) {
 
 void BattleSystem::printStatus(const Player& player, const Boss& boss) {
     cout << "====================\n";
-    cout << "í”Œë ˆì´ì–´ : " << player.hp << " / " << player.maxHP << " HP\n";
-    cout << "êµìˆ˜ë‹˜ : " << boss.hp << " / " << boss.maxHP << " HP\n";
+    cout << "ÇÃ·¹ÀÌ¾î : " << player.hp << " / " << player.maxHP << " HP\n";
+    cout << "±³¼ö´Ô : " << boss.hp << " / " << boss.maxHP << " HP\n";
     cout << "====================\n\n";
 }

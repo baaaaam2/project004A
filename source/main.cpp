@@ -8,12 +8,12 @@ using namespace std;
 
 int main() {
 	vector<Boss> bosses;
-	bosses.emplace_back("ê¹€ì½”ë”© êµìˆ˜ë‹˜", 100, 40, 10); // ë³´ìŠ¤ ìƒì„±
-	bosses.emplace_back("ì¡°ê°ì²´ êµìˆ˜ë‹˜", 100, 50, 5); // ë³´ìŠ¤ ìƒì„±
-	bosses.emplace_back("ë°•ê²Œì„ êµìˆ˜ë‹˜", 100, 30, 30); // ë³´ìŠ¤ ìƒì„±
-	bosses.emplace_back("ì¹œêµ¬1", 80, 20, 1); // ì¤‘ê°„ ë³´ìŠ¤ ìƒì„±
-	bosses.emplace_back("ì¹œêµ¬2", 80, 10, 3); // ì¤‘ê°„ ë³´ìŠ¤ ìƒì„±
-	bosses.emplace_back("ì¹œêµ¬3", 80, 5, 5); // ì¤‘ê°„ ë³´ìŠ¤ ìƒì„±
+	bosses.emplace_back("±èÄÚµù ±³¼ö´Ô", 100, 40, 10); // º¸½º »ı¼º
+	bosses.emplace_back("Á¶°´Ã¼ ±³¼ö´Ô", 100, 50, 5); // º¸½º »ı¼º
+	bosses.emplace_back("¹Ú°ÔÀÓ ±³¼ö´Ô", 100, 30, 30); // º¸½º »ı¼º
+	bosses.emplace_back("Ä£±¸1", 80, 20, 1); // Áß°£ º¸½º »ı¼º
+	bosses.emplace_back("Ä£±¸2", 80, 10, 3); // Áß°£ º¸½º »ı¼º
+	bosses.emplace_back("Ä£±¸3", 80, 5, 5); // Áß°£ º¸½º »ı¼º
 	Map map;
 	Player player("", 100, 30);
 	Controller controller(player, bosses, map);

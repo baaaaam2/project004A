@@ -2,18 +2,18 @@
 #define STORY_SYSTEM_H
 
 #include <string>
-#include "Player.h" // Player ê°ì²´ë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ì‚¬ìš©í•˜ê¸° ìœ„í•´ í¬í•¨
+#include "Player.h" // Player °´Ã¼¸¦ ¸Å°³º¯¼ö·Î »ç¿ëÇÏ±â À§ÇØ Æ÷ÇÔ
 
-// ìŠ¤í† ë¦¬ ì¶œë ¥ í•¨ìˆ˜
+// ½ºÅä¸® Ãâ·Â ÇÔ¼ö
 void printStartStory(const Player& player);
 void printBossEncounterStory(const Player& player);
 void printWinStory(const Player& player);
 void printLoseStory(const Player& player);
 
-// íƒ€ì´í•‘ í•¨ìˆ˜
+// Å¸ÀÌÇÎ ÇÔ¼ö
 void printLine(const string& line);
 
-//ì—”ë”© ì¶œë ¥ í•¨ìˆ˜
+//¿£µù Ãâ·Â ÇÔ¼ö
 void showEnding(const Player& player, char grade);
 
 #endif

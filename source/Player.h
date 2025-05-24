@@ -8,24 +8,24 @@
 
 using namespace std;
 
-//í”Œë ˆì´ì–´ í´ë˜ìŠ¤ <= ìºë¦­í„° ìƒì†
+//ÇÃ·¹ÀÌ¾î Å¬·¡½º <= Ä³¸¯ÅÍ »ó¼Ó
 class Player : public Character {
 private:
-	int credit; // í¬ë ˆë”§
-	double gpa; // í•™ì 
+	int credit; // Å©·¹µ÷
+	double gpa; // ÇĞÁ¡
 	int gold;
 	vector<Item> inventory;
 public:
 	Player(string name, int hp, int atk);
 	string name;
 
-	string getName() const { return name; } // ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
-	void setCredit(int credit) { this->credit = credit; } // í¬ë ˆë”§ ì„¤ì •
-	int getCredit() const { return credit; } // í¬ë ˆë”§ ê°€ì ¸ì˜¤ê¸°
-	void setGPA(int gpa) { this->gpa = gpa; } // í•™ì  ì„¤ì •
-	double getGPA() const { return gpa; } // í•™ì  ê°€ì ¸ì˜¤ê¸°
-	bool isAlive() const { return hp > 0; } // ìƒì¡´ ì—¬ë¶€ í™•ì¸
-	bool isDead() const { return hp <= 0; } // ì‚¬ë§ ì—¬ë¶€ í™•ì¸
+	string getName() const { return name; } // ÀÌ¸§ °¡Á®¿À±â
+	void setCredit(int credit) { this->credit = credit; } // Å©·¹µ÷ ¼³Á¤
+	int getCredit() const { return credit; } // Å©·¹µ÷ °¡Á®¿À±â
+	void setGPA(int gpa) { this->gpa = gpa; } // ÇĞÁ¡ ¼³Á¤
+	double getGPA() const { return gpa; } // ÇĞÁ¡ °¡Á®¿À±â
+	bool isAlive() const { return hp > 0; } // »ıÁ¸ ¿©ºÎ È®ÀÎ
+	bool isDead() const { return hp <= 0; } // »ç¸Á ¿©ºÎ È®ÀÎ
 
 	void showStatus() const;
 	void addItem(const Item& item);

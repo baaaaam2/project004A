@@ -3,13 +3,13 @@
 
 using namespace std;
 
-//í”Œë ˆì´ì–´
+//ÇÃ·¹ÀÌ¾î
 Player::Player(string name, int hp, int atk)
     : Character(100, 30, 10), name(move(name)), gold(50){
-} //ì²´ë ¥ 100, ê³µê²©ë ¥ 30, ë°©ì–´ë ¥ 10
+} //Ã¼·Â 100, °ø°İ·Â 30, ¹æ¾î·Â 10
 
 void Player::showStatus() const {
-    cout << "[í”Œë ˆì´ì–´ ì •ë³´] " << name << " | HP: " << hp << " | ê³µê²©ë ¥: " << attack << " | ê³¨ë“œ: " << gold << "\n";
+    cout << "[ÇÃ·¹ÀÌ¾î Á¤º¸] " << name << " | HP: " << hp << " | °ø°İ·Â: " << attack << " | °ñµå: " << gold << "\n";
 }
 
 void Player::addItem(const Item& item) {
@@ -17,12 +17,12 @@ void Player::addItem(const Item& item) {
 }
 
 void Player::showInventory() const {
-    cout << "\n[ì¸ë²¤í† ë¦¬ ëª©ë¡]\n";
+    cout << "\n[ÀÎº¥Åä¸® ¸ñ·Ï]\n";
     for (size_t i = 0; i < inventory.size(); ++i) {
         cout << i + 1 << ". " << inventory[i].getName()
-            << " (íšŒë³µëŸ‰: " << inventory[i].getHealAmount() << ")\n";
+            << " (È¸º¹·®: " << inventory[i].getHealAmount() << ")\n";
     }
-    if (inventory.empty()) cout << "ì•„ì´í…œ ì—†ìŒ.\n";
+    if (inventory.empty()) cout << "¾ÆÀÌÅÛ ¾øÀ½.\n";
 }
 
 int Player::getGold() const {
@@ -35,13 +35,13 @@ void Player::addGold(int amount) {
 
 void Player::useItem(int index) {
     if (index < 1 || index > inventory.size()) {
-        cout << "ì˜ëª»ëœ ì„ íƒì…ë‹ˆë‹¤.\n";
+        cout << "Àß¸øµÈ ¼±ÅÃÀÔ´Ï´Ù.\n";
         return;
     }
 
     Item item = inventory[index - 1];
     hp += item.getHealAmount();
     if (hp > maxHP) hp = maxHP;
-    std::cout << item.getName() << " ì„(ë¥¼) ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤. HPê°€ " << item.getHealAmount() << " íšŒë³µë©ë‹ˆë‹¤.\n";
+    std::cout << item.getName() << " À»(¸¦) »ç¿ëÇß½À´Ï´Ù. HP°¡ " << item.getHealAmount() << " È¸º¹µË´Ï´Ù.\n";
     inventory.erase(inventory.begin() + index - 1);
 }
