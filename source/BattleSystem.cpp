@@ -43,10 +43,14 @@ void BattleSystem::fight(Player& player, Boss& boss, char& grade) //char& grade 
             cin >> atkChoice;
 
             int damage = 0, successRate = 0;
-            switch (atkChoice) {
-            case '1': damage = 30; successRate = 70; break;
-            case '2': damage = 50; successRate = 50; break;
-            case '3': damage = 70; successRate = 30; break;
+            switch (atkChoice) 
+            {
+            case '1': 
+                damage = 30; successRate = 70; break;
+            case '2': 
+                damage = 50; successRate = 50; break;
+            case '3': 
+                damage = 70; successRate = 30; break;
             default: continue;
             }
             // 전투 진행
@@ -102,19 +106,19 @@ void BattleSystem::fightfriend(Player& player, Boss& boss)
     char choice;
     bool fighting = true;
 
-    std::cout << player.getName() << "(이)가 " << boss.getName() << "에게 질문을 받았다!\n";
+    cout << player.getName() << "(이)가 " << boss.getName() << "에게 질문을 받았다!\n";
     Sleep(1000);
 
     while (fighting) {
-        std::cout << boss.getName() << " : 이거 어떻게 풀어?\n" << std::endl;
+        cout << boss.getName() << " : 이거 어떻게 풀어?\n" << endl;
         printStatus(player, boss);
-        std::cout << "1. 문제 풀기\n";
-        std::cout << "2. 아이템 사용 (미구현)\n선택: ";
-        std::cin >> choice;
+        cout << "1. 문제 풀기\n";
+        cout << "2. 아이템 사용 (미구현)\n선택: ";
+        cin >> choice;
         if (choice == '1') {
             char atkChoice;
-            std::cout << "1. 풀기 (30, 70%)\n2. 찍기 (50, 50%)\n3. 컨닝 (70, 30%)\n선택: ";
-            std::cin >> atkChoice;
+            cout << "1. 풀기 (30, 70%)\n2. 찍기 (50, 50%)\n3. 컨닝 (70, 30%)\n선택: ";
+            cin >> atkChoice;
             int damage = 0, successRate = 0;
             switch (atkChoice) {
             case '1': damage = 30; successRate = 70; break;
@@ -126,18 +130,18 @@ void BattleSystem::fightfriend(Player& player, Boss& boss)
             printStatus(player, boss);
             attack(player, boss, damage, successRate, "주인공", "친구");
             if (boss.isDead()) {
-                std::cout << "시험지를 다 풀었습니다!\n";
+                cout << "시험지를 다 풀었습니다!\n";
                 fighting = false;
                 continue;
             }
             attack(boss, player, 30, 70, "보스", "주인공");
             if (player.isDead()) {
-                std::cout << "문제를 다 풀지 못했습니다! 게임 오버!\n";
+                cout << "문제를 다 풀지 못했습니다! 게임 오버!\n";
                 fighting = false;
             }
         }
         else {
-            std::cout << "아이템 기능은 아직 구현되지 않았습니다.\n";
+            cout << "아이템 기능은 아직 구현되지 않았습니다.\n";
             Sleep(1500);
         }
         if (fighting) system("cls");

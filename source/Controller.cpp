@@ -2,9 +2,11 @@
 #include "Player.h"
 #include "BattleSystem.h"
 #include "StorySystem.h"
+#include "Shop.h"
 #include <iostream>
 #include <conio.h>
 #include <ctime>
+#include <windows.h>
 
 using namespace std;
 
@@ -25,7 +27,7 @@ void Controller::startGame()
     bool running = true;
     char grade = 'F'; // 초기 학점
 
-    while (running) 
+    while (running)
     {
         map.print(player, playerX, playerY);
         input = _getch();
@@ -34,9 +36,9 @@ void Controller::startGame()
         {
             running = false;
         }
-        else if (movePlayer(input)) 
+        else if (movePlayer(input))
         {
-            if (map.getTile(playerX, playerY) == 'B') 
+            if (map.getTile(playerX, playerY) == 'B')
             {
                 printBossEncounterStory(player);
                 BattleSystem bs;
@@ -47,12 +49,17 @@ void Controller::startGame()
                     showEnding(player, grade); //엔딩 출력
                     printWinStory(player);
                 }
-                else if (player.isDead()) 
+                else if (player.isDead())
                 {
                     showEnding(player, grade); //엔딩 출력
                     printLoseStory(player);
                 }
                 running = false;
+            }
+            if (map.getTile(playerX, playerY) == 'S')
+            {
+                Shop shop;
+                shop.enterShop(player);
             }
         }
     }
