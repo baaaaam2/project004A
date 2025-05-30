@@ -14,6 +14,6 @@ void printLoseStory(const Player& player);
 void printLine(const string& line);
 
 //엔딩 출력 함수
-void showEnding(const Player& player, char grade);
+void showEnding(const Player& player, double gpa);
 
 #endif

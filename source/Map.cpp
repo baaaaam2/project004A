@@ -1,6 +1,7 @@
 #include "Map.h"
 #include "Shop.h"
 #include "Item.h"
+#include "Player.h"
 #include <iostream>
 #include <cstdlib>
 #include <windows.h>
@@ -12,30 +13,30 @@ Map::Map() {
     initialize();
 }
 const char game_map[MAP_HEIGHT][MAP_WIDTH + 1] = {
-    "+----------------------------+", // 0
-    "|     |        | <<boss>>    |", // 1 - 오른쪽 위 보스 라벨
-    "|     |        |    B        |", // 2
-    "|              +-----------  |", // 3
-    "|                            |", // 4
-    "|                            |", // 5
-    "|     +-----                 |", // 6
-    "|     |                +-----|", // 7
-    "|     +-----           |     |", // 8
-    "|                      |     |", // 9
-    "|     S                |     |", // 10
-    "|                            |", // 11 - 왼쪽 아래 보스 라벨
-    "|----------                  |", // 12
-    "|  <<boss>>                  |", // 13 - 오른쪽 아래 보스 라벨
-    "|     B                      |", // 14
-    "|----------                  |", // 15
-    "|                   +--------|", // 16
-    "|    ----+          |<<boss>>|", // 17
-    "|        |               B   |", // 18
-    "+----------------------------+"  // 19
+    "+----------------------------+",  // 0
+    "|     |        |  <과목명>   |",  // 1 - 오른쪽 위 보스 라벨
+    "|     |        |             |",  // 2
+    "|              +-----------  |",  // 3
+    "|                            |",  // 4
+    "|                            |",  // 5
+    "|     +-----                 |",  // 6
+    "|     | S              +-----|",  // 7
+    "|     +-----           |     |",  // 8
+    "|                      |     |",  // 9
+    "|                      |     |",  // 10
+    "|                            |",  // 11 - 왼쪽 아래 보스 라벨
+    "|----------                  |",  // 12
+    "|  <과목명>                  |",  // 13 - 오른쪽 아래 보스 라벨
+    "|                            |",  // 14
+    "|----------                  |",  // 15
+    "|                   +--------|",  // 16
+    "|    ----+          |<과목명>|",  // 17
+    "|        |                   |",  // 18
+    "+----------------------------+"   // 19
 };
 
 
-void Map::initialize() 
+void Map::initialize()
 {
     for (int y = 0; y < MAP_HEIGHT; ++y) {
         for (int x = 0; x < MAP_WIDTH; ++x) {
@@ -44,15 +45,16 @@ void Map::initialize()
     }
 }
 
-void Map::print(const Player& player, int playerX, int playerY) {
+void Map::print(const Player& player, int playerX, int playerY, int Bosses) {
     system("cls");
     //주인공 이름, 이동방법 출력
     cout << "주인공 : " << player.name << "\n";
     cout << "이동 : W(위), A(왼쪽), S(아래), D(오른쪽), 종료: Q\n";
+    cout << "남은 시험 수 : " << Bosses << "개\n";
     //맵 및 현재 상태 출력
-    for (int y = 0; y < MAP_HEIGHT; ++y) 
+    for (int y = 0; y < MAP_HEIGHT; ++y)
     {
-        for (int x = 0; x < MAP_WIDTH; ++x) 
+        for (int x = 0; x < MAP_WIDTH; ++x)
         {
             if (x == playerX && y == playerY)
                 cout << '@'; //플레이어 위치, 출력
@@ -80,14 +82,22 @@ void Map::print(const Player& player, int playerX, int playerY) {
                 cout << "계산기";
             }
         }
-        else if (y == 10) 
+        else if (y == 10)
         {
-            if (player.isItemPurchased(3)) 
+            if (player.isItemPurchased(3))
             {
                 cout << "휴대폰";
             }
         }
-        else if (y == 11) cout << "==========================";
+        else if (y == 11)
+        {
+            if (player.getMonsterItemCount() >= 1)
+            {
+                cout << "몬스터 (" << player.getMonsterItemCount() << " / 5)";
+            }
+        }
+        else if (y == 12) cout << "==========================";
+        else if (y == 13) cout << "gpa = " << player.getGPA();
         cout << endl;
     }
 }

@@ -78,3 +78,25 @@ void Player::addDefenseMultiplier(int percent) {
     defense *= percent;
     defense /= 100;
 }
+
+//레벨 올리기
+void Player::levelUp() {
+    if (xp >= maxXP) {
+        level = level + (xp / maxXP);	// 경험치에 따라 레벨 상승
+        xp = xp % maxXP; // 남은 경험치 계산
+        hp = maxHP; // 레벨업 시 체력 회복
+        cout << name << " 님이 레벨 " << level << "로 상승했습니다!\n";
+    }
+}
+
+void Player::useMonsterItem() {
+    if (monsterItemCount > 0) {
+        addHp(30);  // 회복량은 조절 가능
+        monsterItemCount--;
+        cout << "몬스터 아이템을 사용하여 체력을 회복했습니다!" << endl;
+    }
+    else {
+        cout << "몬스터 아이템이 없습니다." << endl;
+    }
+}
+

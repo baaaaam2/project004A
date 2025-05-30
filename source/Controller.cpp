@@ -11,7 +11,23 @@
 using namespace std;
 
 Controller::Controller(Player& player, vector<Boss> bosses, Map& map)
-    : player(player), bosses(move(bosses)), map(map) {
+    : player(player), bosses(move(bosses)), map(map), defeatedBosses(this->bosses.size(), false) {
+
+    // 교수님 보스 3명의 고정 좌표 지정
+    bossMap[{21, 2}] = 0;  // 김코딩 교수님
+    bossMap[{6, 14}] = 1;  // 조객체 교수님
+    bossMap[{24, 18}] = 2; // 박게임 교수님
+}
+
+int Controller::getRemainingBossCount() const
+{
+    int count = 0;
+    for (size_t i = 0; i < bosses.size(); ++i) {
+        if (!defeatedBosses[i] && bosses[i].name.find("교수님") != string::npos) { // 교수님 이름이 포함된 보스만 카운트
+            count++;
+        }
+    }
+    return count;
 }
 
 void Controller::startGame()
@@ -23,13 +39,16 @@ void Controller::startGame()
     printStartStory(player); // StorySystem.h에서 호출
 
     map.initialize();
+    for (const auto& entry : bossMap) { // 보스 위치 설정
+        map.setTile(entry.first.first, entry.first.second, 'B');
+    }
     char input;
     bool running = true;
-    char grade = 'F'; // 초기 학점
+    double gpa = 0.0;
 
     while (running)
     {
-        map.print(player, playerX, playerY);
+        map.print(player, playerX, playerY, getRemainingBossCount());
         input = _getch();
 
         if (input == 'q' || input == 'Q') //q 입력시 종료
@@ -38,32 +57,48 @@ void Controller::startGame()
         }
         else if (movePlayer(input))
         {
-            if (map.getTile(playerX, playerY) == 'B')
-            {
-                printBossEncounterStory(player);
-                BattleSystem bs;
-                bs.fight(player, bosses[0], grade);
-                // 전투 결과에 따라 스토리 출력
-                if (bosses[0].isDead())
-                {
-                    showEnding(player, grade); //엔딩 출력
-                    printWinStory(player);
-                }
-                else if (player.isDead())
-                {
-                    showEnding(player, grade); //엔딩 출력
-                    printLoseStory(player);
-                }
-                running = false;
-            }
-            if (map.getTile(playerX, playerY) == 'S')
+            pair<int, int> currentPos = { playerX, playerY };
+            if (map.getTile(playerX, playerY) == 'S') //상점 입장
             {
                 Shop shop;
                 shop.enterShop(player);
             }
+            if (bossMap.count(currentPos)) {
+                int bossIndex = bossMap[currentPos];
+
+                if (!defeatedBosses[bossIndex]) {
+                    printBossEncounterStory(player);
+                    BattleSystem bs;
+                    bs.fight(player, bosses[bossIndex], gpa);
+
+                    defeatedBosses[bossIndex] = true;
+                    map.setTile(playerX, playerY, '.');
+
+                    if (bosses[bossIndex].isDead()) {
+                        cout << bosses[bossIndex].getName() << " 을(를) 처치했습니다!\n";
+                    }
+                    else {
+                        cout << bosses[bossIndex].getName() << " 과의 전투에서 패배했습니다...\n";
+                    }
+                    Sleep(1500);
+
+                    if (player.isDead()) {
+                        //printLoseStory(player);
+                        // 플레이어가 죽었을 때 부활 처리
+                        continue;
+                    }
+                }
+            }
+
+            if (getRemainingBossCount() <= 0) // 모든 교수님을 처치한 경우(시험을 모두 푼 경우)
+            {
+                cout << "\n시험이 끝났습니다!";
+                showEnding(player, gpa);
+                running = false;
+            }
         }
     }
-    cout << "\n게임 종료!" << endl;
+    cout << "게임 종료!" << endl;
 }
 
 bool Controller::movePlayer(char input) 
@@ -89,10 +124,10 @@ bool Controller::movePlayer(char input)
             BattleSystem bs;
             bs.fightfriend(player, bosses[friendindex]);
             // 플레이어가 죽었으면 이동 실패 처리
-            if (player.isDead()) {
+            /*if (player.isDead()) {
                 std::cout << "플레이어가 사망했습니다.\n";
                 return false;
-            }
+            }*/
         }
         return true;
     }

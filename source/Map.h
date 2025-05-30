@@ -27,7 +27,7 @@ class Map {
 public:
     Map();
     void initialize();
-    void print(const Player& player, int playerX, int playerY);
+    void print(const Player& player, int playerX, int playerY, int Bosses);
     char getTile(int x, int y) const;
     void setTile(int x, int y, char symbol);
 
