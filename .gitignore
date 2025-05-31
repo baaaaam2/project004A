@@ -1,0 +1,19 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+*.obj
+*.exe
+*.log
+*.pdb
+*.sdf
+*.ipch
+*.tlog
+*.VC.db
+*.VC.opendb
+*.ilk
+*.user
+*.suo
+*.tmp
+.vscode/
+bin/
