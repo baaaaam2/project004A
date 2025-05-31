@@ -9,11 +9,6 @@ public:
     virtual ~Character() = default;
 
     virtual void takeDamage(int amount);
-    void attacking(Character& target) {
-        int damage = attack - target.defense;
-        if (damage < 0) damage = 0;
-        target.takeDamage(damage);
-    }
 
     bool isAlive() const;
     bool isDead() const;

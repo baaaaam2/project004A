@@ -1,4 +1,4 @@
-#include "Controller.h"
+ï»¿#include "Controller.h"
 #include "Player.h"
 #include "BattleSystem.h"
 #include "StorySystem.h"
@@ -13,17 +13,17 @@ using namespace std;
 Controller::Controller(Player& player, vector<Boss> bosses, Map& map)
     : player(player), bosses(move(bosses)), map(map), defeatedBosses(this->bosses.size(), false) {
 
-    // ±³¼ö´Ô º¸½º 3¸íÀÇ °íÁ¤ ÁÂÇ¥ ÁöÁ¤
-    bossMap[{21, 2}] = 0;  // ±èÄÚµù ±³¼ö´Ô
-    bossMap[{6, 14}] = 1;  // Á¶°´Ã¼ ±³¼ö´Ô
-    bossMap[{24, 18}] = 2; // ¹Ú°ÔÀÓ ±³¼ö´Ô
+    // êµìˆ˜ë‹˜ ë³´ìŠ¤ 3ëª…ì˜ ê³ ì • ì¢Œí‘œ ì§€ì •
+    bossMap[{21, 2}] = 0;  // ê¹€ì½”ë”© êµìˆ˜ë‹˜
+    bossMap[{6, 14}] = 1;  // ì¡°ê°ì²´ êµìˆ˜ë‹˜
+    bossMap[{24, 18}] = 2; // ë°•ê²Œì„ êµìˆ˜ë‹˜
 }
 
 int Controller::getRemainingBossCount() const
 {
     int count = 0;
     for (size_t i = 0; i < bosses.size(); ++i) {
-        if (!defeatedBosses[i] && bosses[i].name.find("±³¼ö´Ô") != string::npos) { // ±³¼ö´Ô ÀÌ¸§ÀÌ Æ÷ÇÔµÈ º¸½º¸¸ Ä«¿îÆ®
+        if (!defeatedBosses[i] && bosses[i].name.find("êµìˆ˜ë‹˜") != string::npos) { // êµìˆ˜ë‹˜ ì´ë¦„ì´ í¬í•¨ëœ ë³´ìŠ¤ë§Œ ì¹´ìš´íŠ¸
             count++;
         }
     }
@@ -33,103 +33,110 @@ int Controller::getRemainingBossCount() const
 void Controller::startGame()
 {
     srand(static_cast<unsigned>(time(0)));
-    cout << "ÁÖÀÎ°øÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ";
-    getline(cin, player.name); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ ¼³Á¤
+    cout << "ì£¼ì¸ê³µì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ";
+    getline(cin, player.name); //í”Œë ˆì´ì–´ ì´ë¦„ ì„¤ì •
     system("cls");
-    printStartStory(player); // StorySystem.h¿¡¼­ È£Ãâ
+    printStartStory(player); // StorySystem.hì—ì„œ í˜¸ì¶œ
 
     map.initialize();
-    for (const auto& entry : bossMap) { // º¸½º À§Ä¡ ¼³Á¤
+    for (const auto& entry : bossMap) { // ë³´ìŠ¤ ìœ„ì¹˜ ì„¤ì •
         map.setTile(entry.first.first, entry.first.second, 'B');
     }
     char input;
     bool running = true;
-    double gpa = 0.0;
 
     while (running)
     {
         map.print(player, playerX, playerY, getRemainingBossCount());
         input = _getch();
 
-        if (input == 'q' || input == 'Q') //q ÀÔ·Â½Ã Á¾·á
+        if (input == 'q' || input == 'Q') //q ì…ë ¥ì‹œ ì¢…ë£Œ
         {
             running = false;
         }
         else if (movePlayer(input))
         {
             pair<int, int> currentPos = { playerX, playerY };
-            if (map.getTile(playerX, playerY) == 'S') //»óÁ¡ ÀÔÀå
+            if (map.getTile(playerX, playerY) == 'S') //ìƒì  ì…ì¥
             {
                 Shop shop;
                 shop.enterShop(player);
             }
-            if (bossMap.count(currentPos)) {
+            if (bossMap.count(currentPos)) { 
                 int bossIndex = bossMap[currentPos];
 
                 if (!defeatedBosses[bossIndex]) {
                     printBossEncounterStory(player);
                     BattleSystem bs;
-                    bs.fight(player, bosses[bossIndex], gpa);
+                    bs.fight(player, bosses[bossIndex]);
 
                     defeatedBosses[bossIndex] = true;
-                    map.setTile(playerX, playerY, '.');
-
+                    map.setTile(playerX, playerY, ' ');
                     if (bosses[bossIndex].isDead()) {
-                        cout << bosses[bossIndex].getName() << " À»(¸¦) Ã³Ä¡Çß½À´Ï´Ù!\n";
+                        cout << "\n";
+						cout << bosses[bossIndex].getName() << " ì„(ë¥¼) ì²˜ì¹˜í–ˆìŠµë‹ˆë‹¤!\n" << endl;
+						printWinStory(player);
                     }
                     else {
-                        cout << bosses[bossIndex].getName() << " °úÀÇ ÀüÅõ¿¡¼­ ÆĞ¹èÇß½À´Ï´Ù...\n";
+						cout << "\n";
+                        cout << bosses[bossIndex].getName() << " ê³¼ì˜ ì „íˆ¬ì—ì„œ íŒ¨ë°°í–ˆìŠµë‹ˆë‹¤...\n" << endl;
+                        printLoseStory(player);
                     }
-                    Sleep(1500);
-
-                    if (player.isDead()) {
-                        //printLoseStory(player);
-                        // ÇÃ·¹ÀÌ¾î°¡ Á×¾úÀ» ¶§ ºÎÈ° Ã³¸®
+					// ë³´ìŠ¤ ì „íˆ¬ í›„ í”Œë ˆì´ì–´ê°€ ì£½ì€ ê²½ìš°
+                    if (getRemainingBossCount() != 0 && player.isDead()) {
+						system("cls");
+                        printLine("í”Œë ˆì´ì–´ê°€ ê¸°ì ˆí–ˆë‹¤ê°€ ê¸°ìˆ™ì‚¬ì—ì„œ ê¹¨ì–´ë‚¬ìŠµë‹ˆë‹¤..\n");
+                        cout << "(ê³„ì†í•˜ë ¤ë©´ ì•„ë¬´ í‚¤ë‚˜ ëˆ„ë¥´ì„¸ìš”...)\n";
+                        _getch(); // í‚¤ ì…ë ¥ ëŒ€ê¸°
+						player.hp = player.maxHP; // í”Œë ˆì´ì–´ ì²´ë ¥ íšŒë³µ
+						playerX = 1; // í”Œë ˆì´ì–´ ìœ„ì¹˜ ì´ˆê¸°í™”
+						playerY = 1; // í”Œë ˆì´ì–´ ìœ„ì¹˜ ì´ˆê¸°í™”
                         continue;
                     }
                 }
             }
 
-            if (getRemainingBossCount() <= 0) // ¸ğµç ±³¼ö´ÔÀ» Ã³Ä¡ÇÑ °æ¿ì(½ÃÇèÀ» ¸ğµÎ Ç¬ °æ¿ì)
+            if (getRemainingBossCount() <= 0) // ëª¨ë“  êµìˆ˜ë‹˜ì„ ì²˜ì¹˜í•œ ê²½ìš°(ì‹œí—˜ì„ ëª¨ë‘ í‘¼ ê²½ìš°)
             {
-                cout << "\n½ÃÇèÀÌ ³¡³µ½À´Ï´Ù!";
-                showEnding(player, gpa);
+                showEnding(player);
                 running = false;
             }
         }
     }
-    cout << "°ÔÀÓ Á¾·á!" << endl;
+    
+    cout << "\nê²Œì„ ì¢…ë£Œ!" << endl;
+	cout << "ì‹œí—˜ì¹˜ëŠë¼ ê³ ìƒí•˜ì…¨ìŠµë‹ˆë‹¤!\n";
 }
 
 bool Controller::movePlayer(char input) 
 {
     int newX = playerX, newY = playerY;
     switch (input) {
-    case 'w': case 'W': newY--; break; //w,W ÀÔ·Â½Ã Y-1 (À§·Î)
-    case 's': case 'S': newY++; break; //s,S ÀÔ·Â½Ã Y+1 (¹ØÀ¸·Î)
-    case 'a': case 'A': newX--; break; //a,A ÀÔ·Â½Ã X-1 (¿ŞÂÊÀ¸·Î)
-    case 'd': case 'D': newX++; break; //d,D ÀÔ·Â½Ã X+1 (¿À¸¥ÂÊÀ¸·Î)
+    case 'w': case 'W': newY--; break; //w,W ì…ë ¥ì‹œ Y-1 (ìœ„ë¡œ)
+    case 's': case 'S': newY++; break; //s,S ì…ë ¥ì‹œ Y+1 (ë°‘ìœ¼ë¡œ)
+    case 'a': case 'A': newX--; break; //a,A ì…ë ¥ì‹œ X-1 (ì™¼ìª½ìœ¼ë¡œ)
+    case 'd': case 'D': newX++; break; //d,D ì…ë ¥ì‹œ X+1 (ì˜¤ë¥¸ìª½ìœ¼ë¡œ)
     default: return false;
     }
 
-    if (map.getTile(newX, newY) != '|' && map.getTile(newX, newY) != '-' && map.getTile(newX, newY) != '+')
-    {
+    char tile = map.getTile(newX, newY);
+    // ì´ë™ ê°€ëŠ¥í•œ íƒ€ì¼ë§Œ í—ˆìš© (ê³µë°± ë˜ëŠ” 'S' ìœ„ì¹˜ ë“±)
+    if (tile == ' ' || tile == 'S' || tile =='B') {
         playerX = newX;
         playerY = newY;
 
-        int chance = rand() % 100; // ·£´ı È®·ü »ı¼º
-        if (chance < 0) { //È®·ü ¹Ù²Ù±â
-            int friendindex = 3 + rand() % 3; // Ä£±¸ º¸½º Áß ÇÏ³ª ¼±ÅÃ
-            std::cout << bosses[friendindex].name << "¿Í(°ú) Á¶¿ìÇß½À´Ï´Ù!\n";
+        int chance = rand() % 100;
+        if (chance < 0) { // í˜„ì¬ëŠ” í•­ìƒ ì‹¤í–‰ ì•ˆ ë¨ (í™•ë¥  ì¡°ê±´ ìˆ˜ì • í•„ìš”)
+            int friendindex = 3 + rand() % 3;
+            std::cout << bosses[friendindex].name << "ì™€(ê³¼) ì¡°ìš°í–ˆìŠµë‹ˆë‹¤!\n";
             BattleSystem bs;
             bs.fightfriend(player, bosses[friendindex]);
-            // ÇÃ·¹ÀÌ¾î°¡ Á×¾úÀ¸¸é ÀÌµ¿ ½ÇÆĞ Ã³¸®
-            /*if (player.isDead()) {
-                std::cout << "ÇÃ·¹ÀÌ¾î°¡ »ç¸ÁÇß½À´Ï´Ù.\n";
-                return false;
-            }*/
+            bosses[friendindex].hp = bosses[friendindex].maxHP;
+            Sleep(1500);
         }
+
         return true;
     }
+
     return false;
 }

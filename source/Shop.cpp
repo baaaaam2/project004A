@@ -2,15 +2,17 @@
 #include "Item.h"
 #include "Map.h"
 #include "Player.h"
+#define NOMINMAX // min, max 매크로 정의 방지
 #include <windows.h>
+#include <limits>
 
 using namespace std;
 
 Shop::Shop() {
     // 아이템 초기화
-    shopItems.push_back(Item("전공책", 1500, 120, 100, 100)); //가격 : 1500원, 공격력 : 120% = 120, 방어력 : 0, 힐 : 0
-    shopItems.push_back(Item("계산기", 1000, 110, 100, 100)); //가격 : 1000원, 공격력 : 110% = 110, 방어력 : 0, 힐 : 0
-    shopItems.push_back(Item("휴대폰", 4000, 130, 100, 100)); //가격 : 4000원, 공격력 : 130% = 130, 방어력 : 0, 힐 : 0
+    shopItems.push_back(Item("전공책", 1500, 120, 100, 0)); //가격 : 1500원, 공격력 : 120% = 120, 방어력 : 0, 힐 : 0
+    shopItems.push_back(Item("계산기", 1000, 110, 100, 0)); //가격 : 1000원, 공격력 : 110% = 110, 방어력 : 0, 힐 : 0
+    shopItems.push_back(Item("휴대폰", 4000, 130, 100, 0)); //가격 : 4000원, 공격력 : 130% = 130, 방어력 : 0, 힐 : 0
     shopItems.push_back(Item("몬스터", 2000, 100, 100, 30));  //가격 : 2000원, 공격력 :          0, 방어력 : 0, 힐 : 30
 }
 
@@ -33,6 +35,8 @@ void Shop::enterShop(Player& player) {
 
         int choice;
         cin >> choice;
+        cin.clear(); // 입력 버퍼 초기화
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 버퍼 비우기
 
         switch (choice)
         {
@@ -61,27 +65,53 @@ void Shop::showMenu(Player& player) {
 
 void Shop::buyItem(Player& player)
 {
+    int choice = -1;
     //아이템 1번부터 n번째 아이템 까지 나열
     //아이템을 구매했으면 아이템 이름 옆에 (구매완료)라고 출력
-    cout << "\n판매 중인 아이템 : \n";
-    for (size_t i = 0; i < shopItems.size(); ++i)
-    {
-        const Item& item = shopItems[i];
-        cout << i + 1 << ". " << shopItems[i].getName() << " : " << shopItems[i].getPrice() << "원";
-        if (i == 3) { // 4번 몬스터 아이템 (0-based 인덱스)
-            cout << " [보유: " << player.getMonsterItemCount() << "/5]";
-        }
-        if (item.getHealAmount() == 0 && player.isItemPurchased(i + 1)) {
-            cout << "(구매완료)";
-        }
+    while (true) {
+        system("cls");
         cout << "\n";
-    }
-    //아이템 갯수 + 1 선택시 이전메뉴로 돌아가기
-    cout << (shopItems.size() + 1) << ". 돌아가기\n";
-    cout << "선택 : ";
+        cout << "==========================\n";
+        cout << "    상점에 들어왔습니다!   \n";
+        cout << "==========================\n";
+        cout << " 현재 잔액 : " << player.getGold() << "원\n";
+        cout << " 현재 체력 : " << player.hp << " / " << player.maxHP << " HP\n";
+        cout << " 현재 공격력 : " << player.attack << "%\n";
+        cout << " 현재 방어력 : " << player.defense << "%\n";
+        cout << "==========================\n";
+        cout << "\n판매 중인 아이템 \n";
+        for (size_t i = 0; i < shopItems.size(); ++i)
+        {
+            const Item& item = shopItems[i];
+            cout << i + 1 << ". " << item.getName() << " : " << item.getPrice() << "원";
+            if (i == 3) {
+                cout << " [보유: " << player.getMonsterItemCount() << "/5]";
+            }
+            if (item.getHealAmount() == 0 && player.isItemPurchased(i + 1)) {
+                cout << "(구매완료)";
+            }
+            cout << "\n";
+        }
+        cout << shopItems.size() + 1 << ". 돌아가기\n";
+        cout << "선택 : ";
 
-    int choice;
-    cin >> choice;
+        cin >> choice;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (choice >= 1 && choice <= shopItems.size() + 1) {
+            break; // 올바른 입력이면 루프 탈출
+        }
+
+        cout << "잘못된 선택입니다. 다시 입력하세요.\n";
+        Sleep(1500);
+    }
+
+    // ---- 돌아가기 선택 ----
+    if (choice == shopItems.size() + 1) return;
+
+	// ---- 아이템 구매 ----
+
     int index = choice - 1;
     Item item = shopItems[index];
 
@@ -158,7 +188,7 @@ void Shop::buyItem(Player& player)
 
     if (item.getHealAmount() == 0)
     {
-        player.purchaseItem(choice);
+        player.purchaseItem(index + 1); // 인덱스는 0부터 시작하므로 +1
         player.addAttackMultiplier(item.getAttackPlus());   //기본 공격력 + 아이템 공격력
         player.addDefenseMultiplier(item.getDefensePlus()); //기본 방어력 + 아이템 방어력
     }

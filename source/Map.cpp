@@ -1,4 +1,4 @@
-#include "Map.h"
+Ôªø#include "Map.h"
 #include "Shop.h"
 #include "Item.h"
 #include "Player.h"
@@ -8,13 +8,13 @@
 
 using namespace std;
 
-//∏ 
+//Îßµ
 Map::Map() {
     initialize();
 }
 const char game_map[MAP_HEIGHT][MAP_WIDTH + 1] = {
     "+----------------------------+",  // 0
-    "|     |        |  <∞˙∏Ò∏Ì>   |",  // 1 - ø¿∏•¬  ¿ß ∫∏Ω∫ ∂Û∫ß
+    "|     |        |   <ÏΩîÎî©>    |",  // 1 - Ïò§Î•∏Ï™Ω ÏúÑ Î≥¥Ïä§ ÎùºÎ≤®
     "|     |        |             |",  // 2
     "|              +-----------  |",  // 3
     "|                            |",  // 4
@@ -24,19 +24,19 @@ const char game_map[MAP_HEIGHT][MAP_WIDTH + 1] = {
     "|     +-----           |     |",  // 8
     "|                      |     |",  // 9
     "|                      |     |",  // 10
-    "|                            |",  // 11 - øﬁ¬  æ∆∑° ∫∏Ω∫ ∂Û∫ß
+    "|                            |",  // 11 - ÏôºÏ™Ω ÏïÑÎûò Î≥¥Ïä§ ÎùºÎ≤®
     "|----------                  |",  // 12
-    "|  <∞˙∏Ò∏Ì>                  |",  // 13 - ø¿∏•¬  æ∆∑° ∫∏Ω∫ ∂Û∫ß
+    "| <Í∞ùÏ≤¥ÏßÄÌñ•>                 |",  // 13 - Ïò§Î•∏Ï™Ω ÏïÑÎûò Î≥¥Ïä§ ÎùºÎ≤®
     "|                            |",  // 14
     "|----------                  |",  // 15
     "|                   +--------|",  // 16
-    "|    ----+          |<∞˙∏Ò∏Ì>|",  // 17
+    "|    ----+          |<Í≤åÏù¥Î∞ç>|",  // 17
     "|        |                   |",  // 18
     "+----------------------------+"   // 19
 };
 
 
-void Map::initialize()
+void Map::initialize() 
 {
     for (int y = 0; y < MAP_HEIGHT; ++y) {
         for (int x = 0; x < MAP_WIDTH; ++x) {
@@ -47,57 +47,57 @@ void Map::initialize()
 
 void Map::print(const Player& player, int playerX, int playerY, int Bosses) {
     system("cls");
-    //¡÷¿Œ∞¯ ¿Ã∏ß, ¿ÃµøπÊπ˝ √‚∑¬
-    cout << "¡÷¿Œ∞¯ : " << player.name << "\n";
-    cout << "¿Ãµø : W(¿ß), A(øﬁ¬ ), S(æ∆∑°), D(ø¿∏•¬ ), ¡æ∑·: Q\n";
-    cout << "≥≤¿∫ Ω√«Ë ºˆ : " << Bosses << "∞≥\n";
-    //∏  π◊ «ˆ¿Á ªÛ≈¬ √‚∑¬
-    for (int y = 0; y < MAP_HEIGHT; ++y)
+    //Ï£ºÏù∏Í≥µ Ïù¥Î¶Ñ, Ïù¥ÎèôÎ∞©Î≤ï Ï∂úÎ†•
+	cout << "Ï£ºÏù∏Í≥µ : " << player.name << "\t( " << player.getlevel() << "Î†àÎ≤® ) " << " [ " << player.getXP() << " / " << player.getMaxXP() << " XP ]\n";
+    cout << "Ïù¥Îèô : W(ÏúÑ), A(ÏôºÏ™Ω), S(ÏïÑÎûò), D(Ïò§Î•∏Ï™Ω), Ï¢ÖÎ£å: Q\n";
+    cout << "ÎÇ®ÏùÄ ÏãúÌóò Ïàò : " << Bosses << "Í∞ú\n";
+    //Îßµ Î∞è ÌòÑÏû¨ ÏÉÅÌÉú Ï∂úÎ†•
+    for (int y = 0; y < MAP_HEIGHT; ++y) 
     {
-        for (int x = 0; x < MAP_WIDTH; ++x)
+        for (int x = 0; x < MAP_WIDTH; ++x) 
         {
             if (x == playerX && y == playerY)
-                cout << '@'; //«√∑π¿ÃæÓ ¿ßƒ°, √‚∑¬
+                cout << '@'; //ÌîåÎ†àÏù¥Ïñ¥ ÏúÑÏπò, Ï∂úÎ†•
             else
-                cout << tiles[y][x]; //∏ ¿« ±‚∫ª ≈∏¿œ √‚∑¬ : ' ', '-', '|'
+                cout << tiles[y][x]; //ÎßµÏùò Í∏∞Î≥∏ ÌÉÄÏùº Ï∂úÎ†• : ' ', '-', '|'
         }
 
-        //ªÛ≈¬√¢ √‚∑¬
-        cout << "   "; //∞¯πÈ 3ƒ≠¿∏∑Œ ∏ ∞˙ ∫–∏Æ
+        //ÏÉÅÌÉúÏ∞Ω Ï∂úÎ†•
+        cout << "   "; //Í≥µÎ∞± 3Ïπ∏ÏúºÎ°ú ÎßµÍ≥º Î∂ÑÎ¶¨
         if (y == 0)  cout << "==========================";
-        if (y == 1) cout << "√º∑¬ : " << player.hp << " / " << player.maxHP << " HP";
-        else if (y == 2) cout << "πÊæÓ∑¬ : " << player.defense << "%";
-        else if (y == 3) cout << "∞¯∫Œ∑¬ : " << player.attack << "%";
+        if (y == 1) cout << "Ï≤¥Î†• : " << player.hp << " / " << player.maxHP << " HP";
+        else if (y == 2) cout << "Î∞©Ïñ¥Î†• : " << player.defense << "%";
+        else if (y == 3) cout << "Í≥µÎ∂ÄÎ†• : " << player.attack << "%";
         else if (y == 4) cout << "==========================";
-        else if (y == 5) cout << "∞ÒµÂ : " << player.getGold();
+        else if (y == 5) cout << "Í≥®Îìú : " << player.getGold();
         else if (y == 6) cout << "==========================";
-        else if (y == 7) cout << "¿Œ∫•≈‰∏Æ";
+        else if (y == 7) cout << "Ïù∏Î≤§ÌÜ†Î¶¨";
         else if (y == 8) {
             if (player.isItemPurchased(1)) {
-                cout << "¿¸∞¯√•";
+                cout << "Ï†ÑÍ≥µÏ±Ö";
             }
         }
         else if (y == 9) {
             if (player.isItemPurchased(2)) {
-                cout << "∞ËªÍ±‚";
+                cout << "Í≥ÑÏÇ∞Í∏∞";
             }
         }
         else if (y == 10)
         {
             if (player.isItemPurchased(3))
             {
-                cout << "»ﬁ¥Î∆˘";
+                cout << "Ìú¥ÎåÄÌè∞";
             }
         }
         else if (y == 11)
         {
             if (player.getMonsterItemCount() >= 1)
             {
-                cout << "∏ÛΩ∫≈Õ (" << player.getMonsterItemCount() << " / 5)";
+                cout << "Î™¨Ïä§ÌÑ∞ (" << player.getMonsterItemCount() << " / 5)";
             }
         }
         else if (y == 12) cout << "==========================";
-        else if (y == 13) cout << "gpa = " << player.getGPA();
+        else if (y == 13) cout << "ÌòÑÏû¨ ÌèâÍ∑† ÌïôÏ†ê : " << player.averageGPA(Bosses);
         cout << endl;
     }
 }

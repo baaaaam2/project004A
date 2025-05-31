@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <string>
 #include "Item.h"
 #include "Character.h"
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -14,27 +14,22 @@ private:
 	double gpa = 0; // 학점
 	int gold; // 골드
 	int xp; // 경험치
-	int maxXP = 1000; // 최대 경험치
-	int level = 1; // 레벨
+	int maxXP; // 최대 경험치
+	int level; // 레벨
 	vector<Item> inventory;
 
-	bool itemBookPurchased;
-	bool itemCalculatorPurchased;
-	bool itemPhonePurchased;
+	bool itemBookPurchased = false;
+	bool itemCalculatorPurchased = false;
+	bool itemPhonePurchased = false;
 	int itemMonsterPurchased = 0;
-
 	int monsterItemCount = 0;
-
 
 public:
 	Player(string name, int hp, int atk);
 	string name;
 	string getName() const { return name; } // 이름 가져오기
-
-	void setGPA(double newGPA) { gpa = newGPA; }
-	void addGPA(double amount) { gpa += amount; } // 누적용
-	double getGPA() const { return gpa; } // 학점 가져오기
-
+	void setGPA(double gpa) { this->gpa += gpa; } // 학점 설정
+	double averageGPA(int boss) const; // 평균 학점 계산
 	bool isAlive() const { return hp > 0; } // 생존 여부 확인
 	bool isDead() const { return hp <= 0; } // 사망 여부 확인
 
@@ -50,14 +45,16 @@ public:
 
 	void addAttackMultiplier(int percent);  // 예: 120 → 1.2배
 	void addDefenseMultiplier(int percent);  // 예: 120 → 1.2배
-
+	
 	void levelUp();	// 레벨업
-
-	int getMonsterItemCount() const { return monsterItemCount; }
-	void addMonsterItem() { if (monsterItemCount < 5) monsterItemCount++; }
+	int getlevel() const; // 현재 레벨 출력
+	void addXP(int amount); // 경험치 추가
+	int getXP() const; // 현재 경험치 가져오기
+	int getMaxXP() const; // 최대 경험치 가져오기
 
 	void useMonsterItem();  // 몬스터 아이템 사용 함수
-
+	int getMonsterItemCount() const; // 몬스터 아이템 개수 가져오기
+	void addMonsterItem(); // 몬스터 아이템 추가
 };
 
 #endif

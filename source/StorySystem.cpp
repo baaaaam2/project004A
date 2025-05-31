@@ -28,7 +28,7 @@ void printStartStory(const Player& player) {
 
 // 보스 조우 스토리 출력
 void printBossEncounterStory(const Player& player) {
-    printLine("\n교실로 들어가 자리에 앉으니 교수님이 시험지를 들고 다가옵니다.");
+    printLine("교실로 들어가 자리에 앉으니 교수님이 시험지를 들고 다가옵니다.");
     printLine("이 문제들을 풀 수 있겠나, " + player.name + "?");
     printLine("전투가 시작됩니다!");
     cout << "(계속하려면 아무 키나 누르세요...)\n";
@@ -37,26 +37,26 @@ void printBossEncounterStory(const Player& player) {
 
 // 승리 스토리 출력
 void printWinStory(const Player& player) {
-    printLine("\n축하합니다! 시험을 통과했습니다!");
+    printLine("축하합니다! 시험을 통과했습니다!");
     printLine("교수님은 시험지를 걷어가며 만족한 듯 미소를 짓습니다.");
-    printLine("교수님 : 시험공부를 많이 했나보군.");
+    printLine("교수님 : \"시험공부를 많이 했나보군.\"");
     cout << "(계속하려면 아무 키나 누르세요...)\n";
     _getch(); // 키 입력 대기
 }
 
 // 패배 스토리 출력
 void printLoseStory(const Player& player) {
-    printLine("\n아쉽게도 시험에서 패배했습니다...");
+    printLine("아쉽게도 시험에서 패배했습니다...");
     printLine("교수님이 시험지를 걷어가며 만족하지 못한듯 표정을 찡그립니다.");
-    printLine("교수님 : 이 쉬운 시험을 통과를 못하다니....");
+    printLine("교수님 : \"이 쉬운 시험을 통과를 못하다니....\"");
     cout << "(계속하려면 아무 키나 누르세요...)\n";
     _getch(); // 키 입력 대기
 }
 
-//엔딩 출력 예시
-void showEnding(const Player& player, double gpa) {
+//엔딩 출력 예시 (학점 출력 수정)
+void showEnding(const Player& player) {
     system("cls");
-    double avgGPA = player.getGPA() / 3.0;
+	double avgGPA = player.averageGPA(0); // 3과목 평균 학점 계산
     cout << "====================\n";
     cout << "최종 학점 : " << fixed << setprecision(2) << avgGPA << "\n";
     cout << "====================\n";
