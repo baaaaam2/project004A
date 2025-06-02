@@ -212,8 +212,8 @@ void BattleSystem::fightfriend(Player& player, Boss& boss)
                 char atkChoice;
                 cout << "\n어떤 공격을 사용할까요?\n";
                 cout << "1. 평타 (" << 10 * player.attack / 100 << " 데미지, 100% 성공)\n";  // 공격력 반영된 데미지 표시
-                cout << "2. " << skill2.getName() << " (" << skill2.getDamage() << " 데미지, " << skill2.getSuccessRate() << "% 성공)\n";
-                cout << "3. " << skill3.getName() << " (" << skill3.getDamage() << " 데미지, " << skill3.getSuccessRate() << "% 성공)\n";
+                cout << "2. " << skill2.getName() << " (" << skill2.getDamage() * player.attack / 100 << " 데미지, " << skill2.getSuccessRate() << "% 성공)\n";
+                cout << "3. " << skill3.getName() << " (" << skill3.getDamage() * player.attack / 100 << " 데미지, " << skill3.getSuccessRate() << "% 성공)\n";
                 cout << "선택: ";
                 cin >> atkChoice;
 
