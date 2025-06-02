@@ -1,4 +1,4 @@
-癤?#include "Controller.h"
+#include "Controller.h"
 #include "Player.h"
 #include "BattleSystem.h"
 #include "StorySystem.h"
@@ -13,17 +13,17 @@ using namespace std;
 Controller::Controller(Player& player, vector<Boss> bosses, Map& map)
     : player(player), bosses(move(bosses)), map(map), defeatedBosses(this->bosses.size(), false) {
 
-    // 援먯닔?떂 蹂댁뒪 3紐낆쓽 怨좎젙 醫뚰몴 吏??젙
-    bossMap[{21, 2}] = 0;  // 源?肄붾뵫 援먯닔?떂
-    bossMap[{6, 14}] = 1;  // 議곌컼泥? 援먯닔?떂
-    bossMap[{24, 18}] = 2; // 諛뺢쾶?엫 援먯닔?떂
+    // 교수님 보스 3명의 고정 좌표 지정
+    bossMap[{21, 2}] = 0;  // 김코딩 교수님
+    bossMap[{6, 14}] = 1;  // 조객체 교수님
+    bossMap[{24, 18}] = 2; // 박게임 교수님
 }
 
 int Controller::getRemainingBossCount() const
 {
     int count = 0;
     for (size_t i = 0; i < bosses.size(); ++i) {
-        if (!defeatedBosses[i] && bosses[i].name.find("援먯닔?떂") != string::npos) { // 援먯닔?떂 ?씠由꾩씠 ?룷?븿?맂 蹂댁뒪留? 移댁슫?듃
+        if (!defeatedBosses[i] && bosses[i].name.find("교수님") != string::npos) { // 교수님 이름이 포함된 보스만 카운트
             count++;
         }
     }
@@ -33,13 +33,13 @@ int Controller::getRemainingBossCount() const
 void Controller::startGame()
 {
     srand(static_cast<unsigned>(time(0)));
-    cout << "二쇱씤怨듭쓽 ?씠由꾩쓣 ?엯?젰?븯?꽭?슂 : ";
-    getline(cin, player.name); //?뵆?젅?씠?뼱 ?씠由? ?꽕?젙
+    cout << "주인공의 이름을 입력하세요 : ";
+    getline(cin, player.name); //플레이어 이름 설정
     system("cls");
-    printStartStory(player); // StorySystem.h?뿉?꽌 ?샇異?
+    printStartStory(player); // StorySystem.h에서 호출
 
     map.initialize();
-    for (const auto& entry : bossMap) { // 蹂댁뒪 ?쐞移? ?꽕?젙
+    for (const auto& entry : bossMap) { // 보스 위치 설정
         map.setTile(entry.first.first, entry.first.second, 'B');
     }
     char input;
@@ -50,14 +50,14 @@ void Controller::startGame()
         map.print(player, playerX, playerY, getRemainingBossCount());
         input = _getch();
 
-        if (input == 'q' || input == 'Q') //q ?엯?젰?떆 醫낅즺
+        if (input == 'q' || input == 'Q') //q 입력시 종료
         {
             running = false;
         }
         else if (movePlayer(input))
         {
             pair<int, int> currentPos = { playerX, playerY };
-            if (map.getTile(playerX, playerY) == 'S') //?긽?젏 ?엯?옣
+            if (map.getTile(playerX, playerY) == 'S') //상점 입장
             {
                 Shop shop;
                 shop.enterShop(player);
@@ -74,29 +74,29 @@ void Controller::startGame()
                     map.setTile(playerX, playerY, ' ');
                     if (bosses[bossIndex].isDead()) {
                         cout << "\n";
-						cout << bosses[bossIndex].getName() << " ?쓣(瑜?) 泥섏튂?뻽?뒿?땲?떎!\n" << endl;
+						cout << bosses[bossIndex].getName() << " 을(를) 처치했습니다!\n" << endl;
 						printWinStory(player);
                     }
                     else {
 						cout << "\n";
-                        cout << bosses[bossIndex].getName() << " 怨쇱쓽 ?쟾?닾?뿉?꽌 ?뙣諛고뻽?뒿?땲?떎...\n" << endl;
+                        cout << bosses[bossIndex].getName() << " 과의 전투에서 패배했습니다...\n" << endl;
                         printLoseStory(player);
                     }
-					// 蹂댁뒪 ?쟾?닾 ?썑 ?뵆?젅?씠?뼱媛? 二쎌?? 寃쎌슦
+					// 보스 전투 후 플레이어가 죽은 경우
                     if (getRemainingBossCount() != 0 && player.isDead()) {
 						system("cls");
-                        printLine("?뵆?젅?씠?뼱媛? 湲곗젅?뻽?떎媛? 湲곗닕?궗?뿉?꽌 源⑥뼱?궗?뒿?땲?떎..\n");
-                        cout << "(怨꾩냽?븯?젮硫? ?븘臾? ?궎?굹 ?늻瑜댁꽭?슂...)\n";
-                        _getch(); // ?궎 ?엯?젰 ???湲?
-						player.hp = player.maxHP; // ?뵆?젅?씠?뼱 泥대젰 ?쉶蹂?
-						playerX = 1; // ?뵆?젅?씠?뼱 ?쐞移? 珥덇린?솕
-						playerY = 1; // ?뵆?젅?씠?뼱 ?쐞移? 珥덇린?솕
+                        printLine("플레이어가 기절했다가 기숙사에서 깨어났습니다..\n");
+                        cout << "(계속하려면 아무 키나 누르세요...)\n";
+                        _getch(); // 키 입력 대기
+						player.hp = player.maxHP; // 플레이어 체력 회복
+						playerX = 1; // 플레이어 위치 초기화
+						playerY = 1; // 플레이어 위치 초기화
                         continue;
                     }
                 }
             }
 
-            if (getRemainingBossCount() <= 0) // 紐⑤뱺 援먯닔?떂?쓣 泥섏튂?븳 寃쎌슦(?떆?뿕?쓣 紐⑤몢 ?뫜 寃쎌슦)
+            if (getRemainingBossCount() <= 0) // 모든 교수님을 처치한 경우(시험을 모두 푼 경우)
             {
                 showEnding(player);
                 running = false;
@@ -104,44 +104,44 @@ void Controller::startGame()
         }
     }
     
-    cout << "\n寃뚯엫 醫낅즺!" << endl;
-	cout << "?떆?뿕移섎뒓?씪 怨좎깮?븯?뀲?뒿?땲?떎!\n";
+    cout << "\n게임 종료!" << endl;
+	cout << "시험치느라 고생하셨습니다!\n";
 }
 
 bool Controller::movePlayer(char input) 
 {
     int newX = playerX, newY = playerY;
     switch (input) {
-    case 'w': case 'W': newY--; break; //w,W ?엯?젰?떆 Y-1 (?쐞濡?)
-    case 's': case 'S': newY++; break; //s,S ?엯?젰?떆 Y+1 (諛묒쑝濡?)
-    case 'a': case 'A': newX--; break; //a,A ?엯?젰?떆 X-1 (?쇊履쎌쑝濡?)
-    case 'd': case 'D': newX++; break; //d,D ?엯?젰?떆 X+1 (?삤瑜몄そ?쑝濡?)
+    case 'w': case 'W': newY--; break; //w,W 입력시 Y-1 (위로)
+    case 's': case 'S': newY++; break; //s,S 입력시 Y+1 (밑으로)
+    case 'a': case 'A': newX--; break; //a,A 입력시 X-1 (왼쪽으로)
+    case 'd': case 'D': newX++; break; //d,D 입력시 X+1 (오른쪽으로)
     default: return false;
     }
 
     char tile = map.getTile(newX, newY);
-    // ?씠?룞 媛??뒫?븳 ????씪留? ?뿀?슜 (怨듬갚 ?삉?뒗 'S' ?쐞移? ?벑)
+    // 이동 가능한 타일만 허용 (공백 또는 'S' 위치 등)
     if (tile == ' ' || tile == 'S' || tile =='B') {
         playerX = newX;
         playerY = newY;
 
         int chance = rand() % 100;
-        if (chance < 0) { // ?쁽?옱?뒗 ?빆?긽 ?떎?뻾 ?븞 ?맖 (?솗瑜? 議곌굔 ?닔?젙 ?븘?슂)
+        if (chance < 8) { // 현재는 항상 실행 안 됨 (확률 조건 수정 필요)
             int friendindex = 3 + rand() % 3;
-            std::cout << bosses[friendindex].name << "???(怨?) 議곗슦?뻽?뒿?땲?떎!\n";
+            std::cout << bosses[friendindex].name << "와(과) 조우했습니다!\n";
             BattleSystem bs;
             bs.fightfriend(player, bosses[friendindex]);
             bosses[friendindex].hp = bosses[friendindex].maxHP;
             Sleep(1500);
-            if (getRemainingBossCount() != 0 && player.isDead()) 
+            if(getRemainingBossCount() != 0 && player.isDead())
             {
                 system("cls");
                 printLine("플레이어가 기절했다가 기숙사에서 깨어났습니다..\n");
                 cout << "(계속하려면 아무 키나 누르세요...)\n";
-                _getch(); // 키 입력 대기
-                player.hp = player.maxHP; // 플레이어 체력 회복
-                playerX = 1; // 플레이어 위치 초기화
-                playerY = 1; // 플레이어 위치 초기화
+                _getch();
+                player.hp = player.maxHP; // HP를 최대치로 초기화
+                playerX = 1;
+                playerY = 1;
             }
         }
 
