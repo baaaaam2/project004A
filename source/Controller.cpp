@@ -137,10 +137,11 @@ bool Controller::movePlayer(char input)
             {
                 system("cls");
                 printLine("플레이어가 기절했다가 기숙사에서 깨어났습니다..\n");
+                cout << "(계속하려면 아무 키나 누르세요...)\n";
+                _getch();
                 player.hp = player.maxHP; // HP를 최대치로 초기화
                 playerX = 1;
                 playerY = 1;
-                Sleep(2000);
             }
         }
 
