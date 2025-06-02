@@ -19,7 +19,7 @@ void printLine(const string& line) {
 
 // 게임 시작 스토리 출력
 void printStartStory(const Player& player) {
-    printLine("오늘은 "+ player.name +"이(가) 속한 대학교의 중간고사의 마지막 날이다.");
+    printLine("오늘은 "+ player.name +"이(가) 속한 대학교의 기말고사의 마지막 날이다.");
     printLine("" + player.name + "는 오늘 무려 3개의 시험을 치지만 공부를 하지 않아 시험을 망칠 위기에 처하게 되는데");
     printLine("전날 부랴부랴 벼락치기를 했지만 결국 공부를 다 마치치 못한체 학교로 향하게 되는데....");
     cout << "(계속하려면 아무 키나 누르세요...)\n";
