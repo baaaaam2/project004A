@@ -34,8 +34,8 @@
               "Title": "Controller.cpp",
               "DocumentMoniker": "C:\\Users\\Kibum Lim\\Documents\\GitHub\\project004A\\source\\Controller.cpp",
               "RelativeDocumentMoniker": "source\\Controller.cpp",
-              "ToolTip": "C:\\Users\\Kibum Lim\\Documents\\GitHub\\project004A\\source\\Controller.cpp*",
-              "RelativeToolTip": "source\\Controller.cpp*",
+              "ToolTip": "C:\\Users\\Kibum Lim\\Documents\\GitHub\\project004A\\source\\Controller.cpp",
+              "RelativeToolTip": "source\\Controller.cpp",
               "ViewState": "AgIAAG8AAAAAAAAAAAAAAIAAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-03T07:04:35.542Z",
@@ -51,8 +51,7 @@
               "RelativeToolTip": "source\\Map.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-03T07:04:34.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T07:04:34.348Z"
             }
           ]
         }
