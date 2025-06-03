@@ -5,13 +5,13 @@
 C++ 프로그래밍 언어를 기반으로 객체지향 개념(클래스, 상속, 다형성 등)을 활용하여 텍스트 기반 턴 제 RPG 게임을 구현하였습니다. 플레이어와 보스, 중간보스 간의 전투, 아이템 구매/사용, 그리고 학점 시스템을 포함하여 게임의 흐름을 객체지향적으로 구성하였습니다.
 
 <h2>개발환경</h2>  
- * 개발도구 (IDE) : Microsoft Visual Studio 2022
- * 운영 체재 (OS) : Window 10 / Window 11
- * 프로그래밍 언어 : C++ (표준 C++17)
- * 컴파일러 :  MSVS (Microsoft Visual C++)
- * 빌드 도구 : Visual Studio 내장 빌드 시스템
- * 프로젝트 형식 : 콘솔 애플리케이션 (텍스트 기반)
- * 기타 툴 : GitHub, GitHub Desktop, Visual Studio code
+ - 개발도구 (IDE) : Microsoft Visual Studio 2022 </br>
+ - 운영 체재 (OS) : Window 10 / Window 11 </br>
+ - 프로그래밍 언어 : C++ (표준 C++17) </br>
+ - 컴파일러 :  MSVS (Microsoft Visual C++) </br>
+ - 빌드 도구 : Visual Studio 내장 빌드 시스템 </br>
+ - 프로젝트 형식 : 콘솔 애플리케이션 (텍스트 기반) </br>
+ - 기타 툴 : GitHub, GitHub Desktop, Visual Studio code </br>
 
 <h2>게임 규칙</h2>  
 
@@ -24,10 +24,10 @@ C++ 프로그래밍 언어를 기반으로 객체지향 개념(클래스, 상속
 
 <h3>학점 조건</h3> 
 
-A (4.0) : 남은 체력이 70 이상일시
-B (3.0) : 남은 체력이 40 이상일시
-C (2.0) : 남은 체력이 40 미만일시
-F (0.0) : 패배시시
+A (4.0) : 남은 체력이 70 이상일시 </br>
+B (3.0) : 남은 체력이 40 이상일시 </br>
+C (2.0) : 남은 체력이 40 미만일시 </br>
+F (0.0) : 패배시시 </br>
 
 <h2>시연 영상</h2>  
 
@@ -70,7 +70,7 @@ ex) cd Desktop
 git clone https://github.com/baaaaam2/project004A
 ```
 
-<h3>설치 방법 2 ? Download ZIP</h3>  
+<h3>설치 방법 2 - Download ZIP</h3>  
 
 1. 다음과 같은 주소를 인터넷 브라우저 주소창에 입력한다.
 ```
