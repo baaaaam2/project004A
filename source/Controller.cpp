@@ -126,7 +126,7 @@ bool Controller::movePlayer(char input)
         playerY = newY;
 
         int chance = rand() % 100;
-        if (chance < 8) { // 현재는 항상 실행 안 됨 (확률 조건 수정 필요)
+        if (chance < 5) { // (확률 조건 수정 필요)
             int friendindex = 3 + rand() % 3;
             std::cout << bosses[friendindex].name << "와(과) 조우했습니다!\n";
             BattleSystem bs;
