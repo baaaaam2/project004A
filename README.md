@@ -1,32 +1,112 @@
-<h1>protocol 004A</h1>
-ê°ì²´ì§€í–¥í”„ë¡œê·¸ëž˜ë° í”„ë¡œì íŠ¸
-<h2>íŒ€ì›</h2>
-ìž„ê¸°ë²” 5779361<br/>
-ì´ë™ìš° 5881470<br/>
-ê¹€ì§€ìš´ 5881270<br/>
-ìž¥ì£¼í™˜ 5779392<br/>
-<h2>ê°œë°œ í™˜ê²½</h2>
-ìš´ì˜ ì²´ì œ : Windows<br/>
-IDE : Visual Studio 2022<br/>
-ì–¸ì–´ : C++<br/>
-<h2>í´ëž˜ìŠ¤ ì •ë¦¬</h2>
-ìºë¦­í„°<br/>
-(HP, MAXHP, ì´ë¦„, ê³µê²©ë ¥, ë°©ì–´ë ¥)<br/>
- - í”Œë ˆì´ì–´<br/>
- - ë³´ìŠ¤ëª¬ìŠ¤í„°<br/>
- - ì¤‘ê°„ëª¬ìŠ¤í„°<br/>
-ì•„ì´í…œ<br/>
-(ì•„ì´í…œì˜ íš¨ê³¼, ì¢…ë¥˜)<br/>
-ìƒì <br/>
-(ì•„ì´í…œ êµ¬ë§¤)<br/>
-ì¸ë²¤í† ë¦¬<br/>
-(ì•„ì´í…œ ì‚¬ìš©, ì•„ì´í…œ ê´€ë¦¬)<br/>
-ìŠ¤í† ë¦¬<br/>
-(í…ìŠ¤íŠ¸ ìŠ¤í† ë¦¬ ì¶œë ¥, ì „íˆ¬ íë¦„ ì—°ê²°)<br/>
-ë°°í‹€ì‹œìŠ¤í…œ<br/>
-(í„´ì œ ì „íˆ¬ ì‹œìŠ¤í…œ ê´€ë¦¬)<br/>
-ìŠ¤í‚¬<br/>
-ë§µ<br/>
-ì»¨íŠ¸ë¡¤ëŸ¬<br/>
-<h2>ê²Œìž„ ì„¤ëª…</h2>
-<h2>ê¸°íƒ€ ì •ë³´</h2>
+<h1>SnakeGame</h1>
+<h2>? ÇÁ·ÎÁ§Æ® ¼Ò°³</h2>   
+
+º» ÇÁ·ÎÁ§Æ®´Â ±¹¹Î´ëÇÐ±³ ¼ÒÇÁÆ®¿þ¾îÇÐºÎ C++ ÇÁ·Î±×·¡¹Ö °ú¸ñ ÆÀ ÇÁ·ÎÁ§Æ®ÀÇ ÀÏÈ¯À¸·Î C++ ÇÁ·Î±×·¡¹Ö ¾ð¾î·Î ncurses ¶óÀÌºê·¯¸®¸¦ »ç¿ëÇÏ¿© Snake GameÀ» ±¸ÇöÇÏ°íÀÚ ÇÑ´Ù. Snake GameÀº È­¸é¿¡ ÀÖ´Â ¹ìÀ» »óÇÏÁÂ¿ì·Î Á¶ÀÛÇÏ¿© ¹ìÀÌ È­¸é ³¡ÀÌ³ª Àå¾Ö¹°¿¡ ºÎµúÈ÷Áö ¾Ê°í ¸Ó¸®°¡ ¸öÅë¿¡ ´êÁö ¾ÊÀ¸¸é¼­ È­¸é¿¡ ¹«ÀÛÀ§·Î »ý¼ºµÇ´Â ¿©·¯ ¾ÆÀÌÅÛÀ» È¹µæÇÏ¸ç ÁøÇàÇÏ´Â °ÔÀÓÀÌ´Ù.  
+
+<h2>? °³¹ßÈ¯°æ</h2>  
+º» ÇÁ·ÎÁ§Æ®´Â macOS¿Í ±¹¹Î´ëÇÐ±³ ¼ÒÇÁÆ®¿þ¾îÇÐºÎ C++ ÇÁ·Î±×·¡¹Ö °ú¸ñ¿¡¼­ ¿ä±¸ÇÏ´Â Ç¥ÁØ È¯°æÀÎ Linux Ubuntu 20.04(ÀÌÇÏ Ubuntu)¸¦ °³¹ß È¯°æÀ¸·Î ÇÏ°í ÀÖÀ¸¸ç C++ ¼Ò½º ÄÚµå ÄÄÆÄÀÏÀ» À§ÇÑ ÄÄÆÄÀÏ·¯´Â GCC/G++ ÄÄÆÄÀÏ·¯¸¦ »ç¿ëÇÑ´Ù.  
+
+<h2>? °ÔÀÓ ±ÔÄ¢</h2>  
+
+**WSAD Å°** ¶Ç´Â **¹æÇâÅ°**¸¦ ÀÌ¿ëÇÏ¿© **Snake**¸¦ »óÇÏÁÂ¿ì·Î Á¶ÀÛÇÑ´Ù.  
+
+<h3>? ¾ÆÀÌÅÛ</h3> 
+
+**Snake**´Â ´ÙÀ½°ú °°Àº ¾ÆÀÌÅÛÀ» È¹µæÇÒ ¼ö ÀÖ´Ù. 
+
+```
+? Growth Item - ¸öÀÇ ±æÀÌ°¡ 1¸¸Å­ Áõ°¡ÇÑ´Ù.
+? Poison Item - ¸öÀÇ ±æÀÌ°¡ 1¸¸Å­ °¨¼ÒÇÑ´Ù.
+```  
+? **Item**Àº Snake°¡ ÀÖÁö ¾ÊÀº ÀÓÀÇÀÇ À§Ä¡¿¡ ÃâÇöÇÑ´Ù.  
+? **Item**Àº ÃâÇö ÈÄ ÀÏÁ¤½Ã°£ÀÌ Áö³ª¸é »ç¶óÁö°í ´Ù¸¥ À§Ä¡°¡ ³ªÅ¸³­´Ù.  
+? **Item**Àº µ¿½Ã¿¡ 3°³ ÀÌÇÏ¸¸ ÃâÇöÇÒ ¼ö ÀÖ´Ù.  
+  
+
+<h3>? °ÔÀÌÆ®</h3> 
+
+? **Gate**´Â µÎ °³°¡ ÇÑ½ÖÀ¸·Î ÇÑ¹ø¿¡ ÇÑ½Ö¸¸ ³ªÅ¸³ª¸ç »ý¼º À§Ä¡´Â ¼­·Î °ãÄ¡Áö ¾Ê´Â´Ù.  
+? **Gate**´Â ÀÓÀÇÀÇ À§Ä¡ÀÇ º®¿¡¼­ »ý¼ºµÈ´Ù.  
+? **Gate**¿¡ **Snake**°¡ ÁøÀÔÇÏ¸é ¿¬°áµÈ ´Ù¸¥ **Gate**·Î ÁøÃâÇÑ´Ù.  
+? **Gate**¿¡ **Snake**°¡ ÁøÀÔÇÏ¸é **Gate**´Â »ç¶óÁöÁö ¾ÊÀ¸¸ç ´Ù¸¥ À§Ä¡¿¡¼­ **Gate**°¡ ³ªÅ¸³ªÁö ¾Ê´Â´Ù.
+
+<h3>? Á¡¼ö ¹× ¹Ì¼Ç</h3> 
+
+? ¸öÀÇ ÃÖ´ë±æÀÌ, È¹µæÇÑ ¾ÆÀÌÅÛÀÇ ¼ö, °ÔÀÌÆ® »ç¿ë È½¼ö, °ÔÀÓ ½Ã°£À» °¢°¢ °è»êÇÑ´Ù.  
+? °è»êÇÑ Á¡¼öµéÀ» Åä´ë·Î ¹Ì¼Ç ´Þ¼º ¿©ºÎ¸¦ È®ÀÎÇÑ´Ù.  
+
+<h3>? Å¬¸®¾î Á¶°Ç</h3> 
+
+? ¹Ì¼ÇÀ» ¸ðµÎ ´Þ¼ºÇÑ´Ù.
+
+<h3>? ÆÐ¹è Á¶°Ç</h3> 
+
+? **Snake**°¡ ÁøÇà¹æÇâÀÇ ¹Ý´ë¹æÇâÀ¸·Î ÀÌµ¿ÇÑ´Ù.  
+? **Snake**°¡ ÀÚ½ÅÀÇ ¸öÅë¿¡ ºÎµúÈù´Ù.  
+? **Snake**°¡ º®¿¡ ºÎµúÈù´Ù.  
+? **Snake**ÀÇ ¸öÀÇ ±æÀÌ°¡ 3º¸´Ù ÀÛ¾ÆÁø´Ù.  
+
+<h2>? ½Ã¿¬ ¿µ»ó</h2>  
+
+https://user-images.githubusercontent.com/28581778/174078800-c3e9aae8-cce2-4c66-91c3-fb086410ef4f.mp4
+
+
+<h2>? ÆÀ ¼Ò°³</h2> 
+
+```
+? ÀÌ¸§: ¹ÚÃ¢¿ë
+? ÇÐ¹ø: ****3003
+```
+
+```
+? ÀÌ¸§: ¾È½ÃÇö
+? ÇÐ¹ø: ****0502
+```
+
+```
+? ÀÌ¸§: ÀÌÁ¤ÈÆ
+? ÇÐ¹ø: ****1678
+```
+
+<h2>? °ÔÀÓ ¼³Ä¡ ¹æ¹ý</h2>  
+<h3>¼³Ä¡ ¹æ¹ý 1 - git clone</h3>  
+
+1. °ÔÀÓÀ» ¼³Ä¡ÇÏ°íÀÚ ÇÏ´Â µð·ºÅä¸®·Î ÀÌµ¿ÇÏ±â À§ÇØ ÅÍ¹Ì³Î¿¡ ´ÙÀ½°ú °°ÀÌ ÀÔ·ÂÇÑ´Ù.  
+```
+cd °ÔÀÓÀ» ¼³Ä¡ÇÏ°íÀÚ ÇÏ´Â µð·ºÅä¸®
+ex) cd Desktop
+```
+
+2. ´ÙÀ½°ú °°Àº ¸í·É¾î¸¦ ÀÔ·ÂÇÑ´Ù.
+```
+git clone https://github.com/DevJunghun/SnakeGame
+```
+
+<h3>¼³Ä¡ ¹æ¹ý 2 ? Download ZIP</h3>  
+
+1. ´ÙÀ½°ú °°Àº ÁÖ¼Ò¸¦ ÀÎÅÍ³Ý ºê¶ó¿ìÀú ÁÖ¼ÒÃ¢¿¡ ÀÔ·ÂÇÑ´Ù.
+```
+https://github.com/DevJunghun/SnakeGame/archive/refs/heads/main.zip
+```
+
+2. ´Ù¿î·Îµå°¡ ¿Ï·áµÇ¸é ÆÄÀÏÀ» °ÔÀÓÀ» ¼³Ä¡ÇÏ°íÀÚ ÇÏ´Â µð·ºÅä¸®¿¡ ¾ÐÃà ÇØÁ¦ÇÑ´Ù.
+
+
+<h2>? °ÔÀÓ ÇÃ·¹ÀÌ ¹æ¹ý</h2> 
+
+1. ¼³Ä¡¹æ¹ýÀ» µû¶ó ¼³Ä¡¸¦ ¿Ï·áÇÑ ÈÄ ÅÍ¹Ì³Î¿¡ ´ÙÀ½°ú °°ÀÌ ÀÔ·ÂÇÑ´Ù.
+
+```
+cd °ÔÀÓÀ» ¼³Ä¡ÇÑ µð·ºÅä¸®
+ex) cd Desktop/SnakeGame
+```
+
+2. make ¸í·É¾î·Î ÄÄÆÄÀÏÇÑ´Ù.
+```
+make run
+```
+
+3. ½ÇÇà ÆÄÀÏÀ» ½ÇÇàÇÑ´Ù.
+```
+./game
+```
